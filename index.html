@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>QueryLess Analytics | Managed Data Science & Python Dashboards</title>
+    <meta name="description" content="QueryLess Analytics provides fully managed Python dashboards and Machine Learning. Stop hiring expensive BI teams; we build your data pipelines and predictive models.">
+    <link rel="canonical" href="https://www.webtools4.com/queryless-analytics.html">
+    <meta name="keywords" content="managed data science, python dashboards, machine learning as a service, business intelligence automation, lead scoring, dynamic pricing">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.webtools4.com/queryless-analytics.html">
+    <meta property="og:title" content="QueryLess Analytics | Your Managed Data Department">
+    <meta property="og:description" content="We build the pipelines and ML models so you can focus on growth. Unlimited Python dashboards for one flat rate.">
+    <meta property="og:image" content="https://www.webtools4.com/images/og-share.jpg">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Managed Data Science & Analytics",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "QueryLess Analytics",
+        "url": "https://www.webtools4.com/queryless-analytics.html"
+      },
+      "areaServed": "Global",
+      "description": "Enterprise-grade Python dashboards and predictive Machine Learning models delivered as a managed service.",
+      "offers": {
+        "@type": "Offer",
+        "price": "50000",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- FLAT COLOR PALETTE --- */
+        :root {
+            --primary: #ee6c4c;       /* Sunset Orange */
+            --primary-dark: #d55d3e;
+            --accent-green: #8fbc5d;  /* Moss Green */
+            --accent-gold: #fe9d02;   /* Goldenrod */
+            --section-bg: #F1F5F9;    /* Light Slate */
+            --card-bg: #FFFFFF;
+            --light-bg: #F8FAFC;      /* Slate 50 */
+            --text-main: #1F2937;     /* Slate 800 */
+            --text-muted: #64748B;    /* Slate 500 */
+            --white: #FFFFFF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            background-color: var(--light-bg);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #0F172A;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i { color: var(--primary); font-size: 1.8rem; }
+        .logo span { color: var(--primary); }
+
+        .nav-links a {
+            margin-left: 35px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        /* Nav Button Style with White Text */
+        .btn-nav {
+            background-color: var(--primary);
+            color: var(--white) !important; 
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-nav:hover { background-color: var(--primary-dark); }
+
+        /* --- HERO SECTION --- */
+        header.hero {
+            background-color: var(--primary); 
+            color: var(--white);
+            padding: 180px 5% 120px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.95;
+        }
+
+        .btn-hero {
+            background-color: var(--white);
+            color: var(--primary);
+            padding: 16px 36px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-hero:hover { background-color: #f0f0f0; }
+
+        /* --- GRID & CARDS --- */
+        .section { padding: 100px 5%; }
+        .section-title { text-align: center; font-size: 2.5rem; font-weight: 800; margin-bottom: 20px; color: #0F172A; }
+        .section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 60px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #E2E8F0;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover { transform: translateY(-8px); }
+
+        .card h3 { margin-bottom: 15px; font-size: 1.4rem; color: #0F172A; font-weight: 800; }
+        .card p { color: var(--text-muted); }
+
+        .icon-box {
+            width: 60px; height: 60px;
+            background: var(--light-bg);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        /* --- PRICING --- */
+        .pricing-section { background-color: var(--section-bg); }
+        .pricing-box {
+            background: var(--white);
+            border: 1px solid #E2E8F0;
+            text-align: center;
+            padding: 60px 50px;
+            border-radius: 24px;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .badge {
+            position: absolute;
+            top: -15px; left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 8px 24px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .price { font-size: 4.5rem; font-weight: 800; margin: 20px 0; color: #0F172A; }
+        .pricing-box ul { list-style: none; margin-bottom: 40px; text-align: left; }
+        .pricing-box ul li { margin-bottom: 18px; display: flex; align-items: center; gap: 12px; }
+        .pricing-box ul li i { color: var(--accent-green); }
+
+        /* --- AUDIT FORM --- */
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 50px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid #E2E8F0;
+        }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-main); }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #CBD5E1;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 16px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        footer {
+            background: var(--white);
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid #E2E8F0;
+        }
+    </style>
+</head>
+<body>
+    <link rel="icon" href="/favicon.ico" sizes="640x640">
+    <link rel="icon" type="image/png" href="/logo.png" sizes="640x640">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+ 
+    <nav>
+        <a href="index.html" class="logo" aria-label="QueryLess Analytics Home">
+            <i class="fa-solid fa-chart-pie"></i>
+            QueryLess<span>Analytics</span>
+        </a>
+        <div class="nav-links">
+            <a href="#services">Capabilities</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#contact" class="btn-nav">Book a Data Audit</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Stop Wrestling with Data.<br>Start Scaling Your Business.</h1>
+            <p>Fully managed Python dashboards and Machine Learning. We build the pipelines and the logic so you can focus on growth.</p>
+            <a href="#contact" class="btn-hero">Start Free Data Audit</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="section" style="background-color: var(--section-bg);">
+            <h2 class="section-title">The BI Industry is Broken</h2>
+            <div class="grid" style="max-width: 900px;">
+                <div class="card" style="border-left: 5px solid #EF4444;">
+                    <div class="icon-box" style="color: #EF4444;"><i class="fa-solid fa-xmark"></i></div>
+                    <h3>The Old Way</h3>
+                    <p>Buy an expensive $5k/mo BI software license. Spend months hiring a $120k/yr Business Intelligence Engineer. Watch them struggle with API data connectors and write endless SQL queries just to give you a basic bar chart.</p>
+                </div>
+                <div class="card" style="border-left: 5px solid var(--accent-green);">
+                    <div class="icon-box" style="color: var(--accent-green);"><i class="fa-solid fa-check"></i></div>
+                    <h3>The QueryLess Way</h3>
+                    <p>You tell us the business questions you need answered. We build the pipelines, write the Python code, and deliver beautiful, real-time dashboards and predictive ML models. Zero technical headache for your team.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="section">
+            <h2 class="section-title">Intelligence Capabilities</h2>
+            <p class="section-subtitle">We don't just build dashboards; we build "Profit Engines" that work while you sleep.</p>
+            
+            <div class="grid">
+                <article class="card">
+                    <div class="icon-box" style="color: var(--primary);"><i class="fa-solid fa-chart-column"></i></div>
+                    <h3>Executive Python Dashboards</h3>
+                    <p>Standalone command centers tracking live operations and financial health without managing JavaScript architectures.</p>
+                </article>
+                <article class="card">
+                    <div class="icon-box" style="color: var(--primary);"><i class="fa-solid fa-tags"></i></div>
+                    <h3>Dynamic Pricing Engine</h3>
+                    <p>Maximize profit by automatically adjusting prices based on real-time market demand and competitor behavior.</p>
+                </article>
+                <article class="card">
+                    <div class="icon-box" style="color: var(--accent-gold);"><i class="fa-solid fa-bullseye"></i></div>
+                    <h3>Smart Lead Scoring</h3>
+                    <p>Rank your inquiries from 1–100 so your sales team spends time only on high-intent prospects most likely to close.</p>
+                </article>
+                <article class="card">
+                    <div class="icon-box" style="color: var(--accent-green);"><i class="fa-solid fa-basket-shopping"></i></div>
+                    <h3>Market Basket Analysis</h3>
+                    <p>Identify purchasing patterns to power "Frequently Bought Together" recommendations and increase your average order value.</p>
+                </article>
+                <article class="card">
+                    <div class="icon-box" style="color: var(--primary);"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                    <h3>Precision Demand Forecasting</h3>
+                    <p>Predict exactly what you'll need next month to cut storage costs and ensure your best-sellers are always in stock.</p>
+                </article>
+                <article class="card">
+                    <div class="icon-box" style="color: var(--accent-gold);"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3>Automated Anomaly Detection</h3>
+                    <p>Deploy a 24/7 digital guard that flags unusual transactions or server spikes before they become expensive problems.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="pricing" class="section">
+            <h2 class="section-title">Enterprise-Grade Value</h2>
+            <div class="pricing-box">
+                <div class="badge">Enterprise Data Department</div>
+                <div class="price">$50k/year</div>
+                <ul>
+                    <li><i class="fa-solid fa-circle-check"></i> Unlimited custom Python dashboards</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Bespoke ML model deployment</li>
+                    <li><i class="fa-solid fa-circle-check"></i> API & pipeline maintenance</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Fractional Chief Data Officer Advisory services</li>
+                </ul>
+                <a href="#contact" class="btn-nav" style="display:block; text-align:center;">Get Started Today</a>
+            </div>
+        </section>
+
+        <section id="contact" class="section" style="background-color: var(--light-bg);">
+            <h2 class="section-title">Book Your Data Audit</h2>
+            <p class="section-subtitle">Identify high-impact opportunities for automation and growth.</p>
+            <div class="form-container">
+                <form id="auditForm">
+                    <div class="form-group">
+                        <label for="form-name">Full Name</label>
+                        <input type="text" id="form-name" name="name" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="form-email">Work Email</label>
+                        <input type="email" id="form-email" name="email" placeholder="john@company.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="form-challenge">Primary Challenge</label>
+                        <select id="form-challenge" name="challenge" onchange="toggleOtherChallenge()" required>
+                            <option value="">Select a challenge...</option>
+                            <option value="Manual Reporting">Manual Reporting / Spreadsheets</option>
+                            <option value="Broken Data Connectors">Broken Data Connectors</option>
+                            <option value="Predictive Analytics">Predictive Analytics / ML Needs</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="other-challenge-group" style="display: none;">
+                        <label for="form-challenge-other">Please specify your challenge</label>
+                        <input type="text" id="form-challenge-other" name="other_challenge" placeholder="Describe your challenge...">
+                    </div>
+                    <div class="form-group">
+                        <label for="form-stack">Current Data Stack</label>
+                        <textarea id="form-stack" name="stack" rows="4" placeholder="Mention the tools you currently use..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Request Diagnostic Audit</button>
+                </form>
+                <div style="text-align: center; margin-top: 20px;">
+                    Prefer manual contact? Email us at akhileshsk@gmail.com
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 QueryLess Analytics. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        function toggleOtherChallenge() {
+            const select = document.getElementById('form-challenge');
+            const otherGroup = document.getElementById('other-challenge-group');
+            otherGroup.style.display = select.value === 'Other' ? 'block' : 'none';
+        }
+
+        document.getElementById('auditForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('form-name').value;
+            const email = document.getElementById('form-email').value;
+            let challenge = document.getElementById('form-challenge').value;
+            if (challenge === 'Other') challenge = document.getElementById('form-challenge-other').value;
+            const stack = document.getElementById('form-stack').value;
+
+            const subject = encodeURIComponent("New Data Audit Request: " + name);
+            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nChallenge: ${challenge}\nStack: ${stack}`);
+            // window.location.href = `mailto:akhileshsk@gmail.com?subject=${subject}&body=${body}`;
+        });
+    </script>
+</body>
+</html>
