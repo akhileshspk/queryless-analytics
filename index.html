@@ -180,7 +180,7 @@
             margin-bottom: 20px;
         }
 
-        /* --- PRICING --- */
+        /* --- PRICING & CONTAINERS --- */
         .pricing-section { background-color: var(--section-bg); }
         .pricing-box {
             background: var(--white);
@@ -250,6 +250,46 @@
             text-align: center;
             padding: 40px;
             border-top: 1px solid #E2E8F0;
+        }
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 768px) {
+            .nav-links a:not(.btn-nav) {
+                display: none; 
+            }
+            .nav-links a.btn-nav {
+                margin-left: 0; 
+            }
+            .logo {
+                font-size: 1.2rem;
+            }
+            header.hero {
+                padding: 140px 5% 80px;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .section {
+                padding: 60px 5%;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .grid {
+                grid-template-columns: 1fr; 
+            }
+            .pricing-box {
+                padding: 40px 20px;
+            }
+            .price {
+                font-size: 3.2rem;
+            }
+            .form-container {
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>
@@ -330,6 +370,24 @@
                     <h3>Automated Anomaly Detection</h3>
                     <p>Deploy a 24/7 digital guard that flags unusual transactions or server spikes before they become expensive problems.</p>
                 </article>
+            </div>
+        </section>
+
+        <section id="founder" class="section" style="background-color: var(--section-bg);">
+            <h2 class="section-title">Meet the Founder</h2>
+            <div class="form-container" style="text-align: center; max-width: 800px;">
+                <div class="icon-box" style="color: var(--primary); margin: 0 auto 20px; border-radius: 50%; width: 80px; height: 80px; font-size: 2.5rem; background: #FFF5F2;">
+                    <i class="fa-solid fa-user-tie"></i>
+                </div>
+                <h3 style="font-size: 1.8rem; margin-bottom: 5px; color: #0F172A;">Akhilesh Khope</h3>
+                <p style="color: var(--primary); margin-bottom: 25px; font-weight: 600; text-transform: uppercase; font-size: 0.9rem;">Founder & CEO</p>
+                
+                <p style="margin-bottom: 15px; text-align: left;">
+                    Akhilesh holds a Bachelor's and Master's degree from the prestigious <strong>Indian Institute of Technology Bombay</strong>, as well as an MS and PhD in Electrical and Computer Engineering from the <strong>University of California Santa Barbara, USA</strong>.
+                </p>
+                <p style="text-align: left;">
+                    Prior to starting QueryLess Analytics, Akhilesh spent 5 years at <strong>Microsoft Corporation</strong>. Drawing from his extensive engineering background and enterprise experience, he founded QueryLess Analytics to solve a critical problem: helping businesses harness the full power of their data through automated, high-impact machine learning and predictive pipelines.
+                </p>
             </div>
         </section>
 
