@@ -254,38 +254,40 @@
 
         /* --- MOBILE RESPONSIVENESS --- */
         @media (max-width: 768px) {
-            nav {
-                flex-wrap: nowrap; /* Forces elements to stay on the same line */
-                padding: 12px 5%;  /* Tightens the top and bottom white space */
-            }
-            .nav-links a:not(.btn-nav) {
-                display: none; 
-            }
-            
-            /* The CSS trick to shorten the button text on mobile */
-            .nav-links a.btn-nav {
-                margin-left: 0; 
-                padding: 8px 14px;
-                white-space: nowrap;
-                font-size: 0; /* Hides the original long text */
-            }
-            .nav-links a.btn-nav::after {
-                content: "Data Audit"; /* Replaces it with shorter text */
-                font-size: 0.85rem;
-                font-weight: 700;
+            .nav-links {
+                display: none; /* Entirely hides the navigation links and button on mobile */
             }
             .logo {
-                font-size: 1.1rem;   /* Scales down the logo text */
+                font-size: 1.2rem;
             }
-            .logo i {
-                font-size: 1.4rem;   /* Scales down the pie chart icon */
-            }
-            
-            /* ... Keep the rest of your existing mobile rules below this ... */
             header.hero {
                 padding: 140px 5% 80px;
             }
-            /* ... */
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .section {
+                padding: 60px 5%;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .grid {
+                grid-template-columns: 1fr; 
+            }
+            .pricing-box {
+                padding: 40px 20px;
+            }
+            .price {
+                font-size: 3.2rem;
+            }
+            .form-container {
+                padding: 30px 20px;
+            }
+        }
     </style>
 </head>
 <body>
