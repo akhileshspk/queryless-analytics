@@ -255,16 +255,24 @@
         /* --- MOBILE RESPONSIVENESS --- */
         @media (max-width: 768px) {
             nav {
-                padding: 15px 5%; /* Gives a bit more horizontal room */
+                flex-wrap: nowrap; /* Forces elements to stay on the same line */
+                padding: 12px 5%;  /* Tightens the top and bottom white space */
             }
             .nav-links a:not(.btn-nav) {
                 display: none; 
             }
+            
+            /* The CSS trick to shorten the button text on mobile */
             .nav-links a.btn-nav {
                 margin-left: 0; 
-                white-space: nowrap; /* Prevents text from splitting */
-                padding: 8px 12px;   /* Reduces bulky padding */
-                font-size: 0.85rem;  /* Scales down the font slightly */
+                padding: 8px 14px;
+                white-space: nowrap;
+                font-size: 0; /* Hides the original long text */
+            }
+            .nav-links a.btn-nav::after {
+                content: "Data Audit"; /* Replaces it with shorter text */
+                font-size: 0.85rem;
+                font-weight: 700;
             }
             .logo {
                 font-size: 1.1rem;   /* Scales down the logo text */
