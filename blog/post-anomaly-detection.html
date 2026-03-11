@@ -57,12 +57,7 @@
 </head>
 <body>
 
-    <nav>
-        <a href="index.html" class="logo">
-            <i class="fa-solid fa-chart-pie"></i>
-            QueryLess<span>Analytics</span>
-        </a>
-    </nav>
+    <div id="nav-placeholder"></div>
 
     <article class="article-container">
         <span class="category-tag">Manufacturing</span>
@@ -106,6 +101,12 @@
     <footer>
         <p>&copy; 2026 QueryLess Analytics. All rights reserved.</p>
     </footer>
-
+    <script>
+        fetch('nav.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav-placeholder').innerHTML = data;
+            });
+    </script>
 </body>
 </html>
