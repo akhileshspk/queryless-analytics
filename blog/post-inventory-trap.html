@@ -49,8 +49,13 @@
 
         footer { text-align: center; padding: 60px 5%; border-top: 1px solid #E2E8F0; margin-top: 60px; }
 
+        /* --- MOBILE RESPONSIVENESS --- */
         @media (max-width: 768px) {
-            .nav-links { display: none; }
+            nav { padding: 15px 5%; justify-content: space-between; }
+            .nav-links a:not([href="blog.html"]) { display: none !important; }
+            .nav-links { display: flex; align-items: center; }
+            .nav-links a[href="blog.html"] { margin-left: 0; font-size: 1rem; }
+            .logo { font-size: 1.1rem; }
             .stat-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -70,9 +75,10 @@
     </nav>
 
     <article class="article-container">
-        <a href="../index.html" style="display: inline-block; margin-bottom: 20px; color: var(--text-muted); text-decoration: none; font-weight: 600;">
-        <i class="fa-solid fa-arrow-left"></i> Back to Home
+        <a href="index.html" style="display: block; margin-bottom: 20px; color: var(--text-muted); text-decoration: none; font-weight: 600;">
+            <i class="fa-solid fa-arrow-left"></i> Back to Home
         </a>
+        
         <span class="category-tag">Retail & E-commerce</span>
         <h1>How AeroGear Unlocked $65,000 in Frozen Capital</h1>
         <p class="lead">By transitioning from "gut-feeling" ordering to predictive Python pipelines, AeroGear eliminated stockouts and slashed warehouse overhead.</p>
@@ -95,7 +101,7 @@
 
         <div class="content-section">
             <h2>The QueryLess Solution</h2>
-            <p>We built an automated data pipeline that connected their Shopify store directly to a custom forecasting engine. Instead of a generic dashboard, we delivered a <strong>Precision Demand Forecasting</strong> model that analyzed three years of historical sales, regional weather patterns, and marketing spend.</p>
+            <p>We built an automated data pipeline that connected their Shopify store and Warehouse Management System (WMS) directly to a custom forecasting engine. Instead of a generic dashboard, we delivered a <strong>Precision Demand Forecasting</strong> model that analyzed three years of historical sales, regional weather patterns, and marketing spend.</p>
             <p>The system automatically generated weekly "Optimal Order Quantities" (EOQ), ensuring they only spent cash on products guaranteed to move.</p>
         </div>
 
