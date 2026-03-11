@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | QueryLess Analytics Success Stories</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ee6c4c;
+            --primary-dark: #d55d3e;
+            --section-bg: #F1F5F9;
+            --card-bg: #FFFFFF;
+            --light-bg: #F8FAFC;
+            --text-main: #1F2937;
+            --text-muted: #64748B;
+            --white: #FFFFFF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; color: var(--text-main); background-color: var(--light-bg); line-height: 1.7; }
+
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: #0F172A; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .logo i { color: var(--primary); font-size: 1.8rem; }
+        .logo span { color: var(--primary); }
+        .nav-links a { margin-left: 35px; text-decoration: none; color: var(--text-main); font-weight: 600; }
+        .btn-nav { background-color: var(--primary); color: var(--white) !important; padding: 10px 20px; border-radius: 6px; font-weight: 700; }
+
+        .blog-header { background-color: var(--primary); color: var(--white); padding: 150px 5% 60px; text-align: center; }
+        .blog-header h1 { font-size: 3rem; font-weight: 800; margin-bottom: 15px; }
+
+        .section { padding: 80px 5%; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        
+        .blog-card { background: var(--card-bg); border-radius: 16px; border: 1px solid #E2E8F0; overflow: hidden; transition: transform 0.3s ease; text-decoration: none; color: inherit; display: flex; flex-direction: column; }
+        .blog-card:hover { transform: translateY(-8px); }
+        .blog-content { padding: 30px; }
+        .category { color: var(--primary); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; display: block; }
+        .blog-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: #0F172A; }
+        .blog-card p { color: var(--text-muted); margin-bottom: 20px; }
+        .read-more { font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+
+        footer { background: var(--white); text-align: center; padding: 40px; border-top: 1px solid #E2E8F0; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .blog-header h1 { font-size: 2.2rem; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">
+            <i class="fa-solid fa-chart-pie"></i>
+            QueryLess<span>Analytics</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html#services">Capabilities</a>
+            <a href="blog.html">Blog</a>
+            <a href="index.html#pricing">Pricing</a>
+            <a href="index.html#contact" class="btn-nav">Book a Data Audit</a>
+        </div>
+    </nav>
+
+    <header class="blog-header">
+        <h1>Data Science Success Stories</h1>
+        <p>Real-world impact through managed Python pipelines and ML.</p>
+    </header>
+
+    <main class="section">
+        <div class="grid">
+            <a href="blog/post-inventory-trap.html" class="blog-card">
+                <div class="blog-content">
+                    <span class="category">Retail & E-commerce</span>
+                    <h3>Unlocking $65k in Frozen Capital</h3>
+                    <p>How AeroGear used predictive demand forecasting to eliminate overstock and stop missing peak sales.</p>
+                    <div class="read-more">Read Case Study <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+            </a>
+
+            <a href="blog/post-sales-efficiency.html" class="blog-card">
+                <div class="blog-content">
+                    <span class="category">B2B SaaS</span>
+                    <h3>Doubling Sales Team Efficiency</h3>
+                    <p>Stopping the leak: How smart lead scoring allowed a sales team to focus on the top 10% of high-intent prospects.</p>
+                    <div class="read-more">Read Case Study <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+            </a>
+
+            <a href="blog/post-margin-mystery.html" class="blog-card">
+                <div class="blog-content">
+                    <span class="category">Manufacturing & Distribution</span>
+                    <h3>The Margin Mystery: Recovering Profit</h3>
+                    <p>How Precision Parts Co. stopped their margin leak by deploying a real-time Dynamic Pricing Engine to respond to volatile market shifts.</p>
+                    <div class="read-more">Read Case Study <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+            </a>
+
+            <a href="blog/post-anomaly-detection.html" class="blog-card">
+                <div class="blog-content">
+                    <span class="category">Manufacturing</span>
+                    <h3>Preventing Costly Downtime</h3>
+                    <p>How automated anomaly detection recovered 12% in production time for Titan Industrial.</p>
+                    <div class="read-more">Read Case Study <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 QueryLess Analytics. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?> <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.qanalytics.in/</loc>
+    <lastmod>2026-03-11</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.qanalytics.in/blog.html</loc>
+    <lastmod>2026-03-11</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.qanalytics.in/blog/post-anomaly-detection.html</loc>
+    <lastmod>2026-03-11</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.qanalytics.in/blog/post-inventory-trap.html</loc>
+    <lastmod>2026-03-11</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.qanalytics.in/blog/post-margin-mystery.html</loc>
+    <lastmod>2026-03-11</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.qanalytics.in/blog/post-sales-efficiency.html</loc>
+    <lastmod>2026-03-11</lastmod>
+    <priority>1.0</priority>
+  </url>
+</urlset>
