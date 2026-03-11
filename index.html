@@ -254,12 +254,36 @@
 
         /* --- MOBILE RESPONSIVENESS --- */
         @media (max-width: 768px) {
+            nav {
+                padding: 15px 5%;
+                justify-content: space-between;
+            }
+
+            /* Hide only the secondary text links to save horizontal space */
+            .nav-links a:not(.btn-nav):not([href="blog.html"]) {
+                display: none; 
+            }
+
+            /* Ensure Blog and Audit button stay visible and compact */
             .nav-links {
-                display: none; /* Entirely hides the navigation links and button on mobile */
+                display: flex;
+                gap: 10px;
+                align-items: center;
             }
+
+            .nav-links a {
+                margin-left: 0;
+                font-size: 0.85rem;
+            }
+
+            .btn-nav {
+                padding: 8px 12px;
+            }
+
             .logo {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
             }
+
             header.hero {
                 padding: 140px 5% 80px;
             }
