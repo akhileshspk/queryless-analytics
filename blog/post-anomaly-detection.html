@@ -49,8 +49,13 @@
 
         footer { text-align: center; padding: 60px 5%; border-top: 1px solid #E2E8F0; margin-top: 60px; }
 
+        /* --- MOBILE RESPONSIVENESS --- */
         @media (max-width: 768px) {
-            .nav-links { display: none; }
+            nav { padding: 15px 5%; justify-content: space-between; }
+            .nav-links a:not([href="blog.html"]) { display: none !important; }
+            .nav-links { display: flex; align-items: center; }
+            .nav-links a[href="blog.html"] { margin-left: 0; font-size: 1rem; }
+            .logo { font-size: 1.1rem; }
             .stat-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -70,9 +75,10 @@
     </nav>
 
     <article class="article-container">
-        <a href="../index.html" style="display: inline-block; margin-bottom: 20px; color: var(--text-muted); text-decoration: none; font-weight: 600;">
-        <i class="fa-solid fa-arrow-left"></i> Back to Home
+        <a href="index.html" style="display: block; margin-bottom: 20px; color: var(--text-muted); text-decoration: none; font-weight: 600;">
+            <i class="fa-solid fa-arrow-left"></i> Back to Home
         </a>
+
         <span class="category-tag">Manufacturing</span>
         <h1>Preventing Costly Downtime: How Titan Industrial Recovered 12% in Production Time</h1>
         <p class="lead">By deploying Automated Anomaly Detection, Titan Industrial shifted from reactive repairs to predictive maintenance, saving $18,000 per month in emergency costs.</p>
