@@ -259,25 +259,19 @@
                 justify-content: space-between;
             }
 
-            /* Hide only the secondary text links to save horizontal space */
-            .nav-links a:not(.btn-nav):not([href="blog.html"]) {
-                display: none; 
+            /* Hide everything in nav-links EXCEPT the Blog link */
+            .nav-links a:not([href="blog.html"]) {
+                display: none !important; 
             }
 
-            /* Ensure Blog and Audit button stay visible and compact */
             .nav-links {
                 display: flex;
-                gap: 10px;
                 align-items: center;
             }
 
-            .nav-links a {
+            .nav-links a[href="blog.html"] {
                 margin-left: 0;
-                font-size: 0.85rem;
-            }
-
-            .btn-nav {
-                padding: 8px 12px;
+                font-size: 1rem;
             }
 
             .logo {
