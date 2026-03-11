@@ -295,7 +295,18 @@
     <link rel="icon" type="image/png" href="/logo.png" sizes="640x640">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
  
-    <div id="nav-placeholder"></div>
+    <nav>
+        <a href="index.html" class="logo" aria-label="QueryLess Analytics Home">
+            <i class="fa-solid fa-chart-pie"></i>
+            QueryLess<span>Analytics</span>
+        </a>
+        <div class="nav-links">
+            <a href="#services">Capabilities</a>
+            <a href="blog.html">Blog</a> 
+            <a href="#pricing">Pricing</a>
+            <a href="#contact" class="btn-nav">Book a Data Audit</a>
+        </div>
+    </nav>
 
     <header class="hero">
         <div class="hero-content">
@@ -462,13 +473,6 @@
             const subject = encodeURIComponent("New Data Audit Request: " + name);
             const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nChallenge: ${challenge}\nStack: ${stack}`);
             window.location.href = `mailto:akhileshsk@gmail.com?subject=${subject}&body=${body}`;
-        });
-    </script>
-    <script>
-    fetch('nav.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('nav-placeholder').innerHTML = data;
         });
     </script>
 </body>
