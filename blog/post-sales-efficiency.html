@@ -47,10 +47,21 @@
         .founder-box { background: #0F172A; color: var(--white); padding: 40px; border-radius: 20px; margin-top: 80px; }
         .founder-box h4 { color: var(--primary); text-transform: uppercase; margin-bottom: 10px; }
 
+        /* --- CTA BOX --- */
+        .cta-box { text-align: center; background: var(--section-bg); padding: 50px 30px; border-radius: 20px; margin-top: 60px; border: 1px solid #E2E8F0; }
+        .cta-box h3 { font-size: 1.8rem; color: #0F172A; margin-bottom: 20px; }
+        .cta-btn { background-color: var(--primary); color: var(--white); padding: 15px 30px; border-radius: 8px; font-weight: 700; text-decoration: none; display: inline-block; font-size: 1.1rem; transition: background-color 0.3s ease; }
+        .cta-btn:hover { background-color: var(--primary-dark); color: var(--white); }
+
         footer { text-align: center; padding: 60px 5%; border-top: 1px solid #E2E8F0; margin-top: 60px; }
 
+        /* --- MOBILE RESPONSIVENESS --- */
         @media (max-width: 768px) {
-            .nav-links { display: none; }
+            nav { padding: 15px 5%; justify-content: space-between; }
+            .nav-links a:not([href="blog.html"]) { display: none !important; }
+            .nav-links { display: flex; align-items: center; }
+            .nav-links a[href="blog.html"] { margin-left: 0; font-size: 1rem; }
+            .logo { font-size: 1.1rem; }
             .stat-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -60,18 +71,22 @@
     <link rel="icon" type="image/png" href="../logo.png" sizes="640x640">
     <link rel="apple-touch-icon" href="../apple-touch-icon.png">
     <nav>
-        <a href="../index.html" class="logo">
+        <a href="index.html" class="logo">
             <i class="fa-solid fa-chart-pie"></i>
             QueryLess<span>Analytics</span>
         </a>
         <div class="nav-links">
-            <a href="../index.html#services">Capabilities</a>
-            <a href="../blog.html">Blog</a>
-            <a href="../index.html#contact" class="btn-nav">Data Audit</a>
+            <a href="index.html#services">Capabilities</a>
+            <a href="blog.html">Blog</a>
+            <a href="index.html#contact" class="btn-nav">Data Audit</a>
         </div>
     </nav>
 
     <article class="article-container">
+        <a href="index.html" style="display: block; margin-bottom: 20px; color: var(--text-muted); text-decoration: none; font-weight: 600;">
+            <i class="fa-solid fa-arrow-left"></i> Back to Home
+        </a>
+
         <span class="category-tag">B2B SaaS</span>
         <h1>Stopping the Leak: Doubling Sales Team Efficiency at CloudScale</h1>
         <p class="lead">How CloudScale Solutions used Smart Lead Scoring to stop chasing dead ends and start closing high-value enterprise contracts.</p>
@@ -107,6 +122,12 @@
             <h4>Founder's Perspective</h4>
             <p><em>"Efficiency isn't about doing more things; it's about doing fewer useless things. Drawing on my background at Microsoft, I helped CloudScale stop treat every lead as equal. By injecting predictive logic into their CRM, we gave their sales team the ability to see the 'win' before they even picked up the phone."</em></p>
             <p style="margin-top:20px; font-weight: 800;">— Akhilesh Khope, PhD</p>
+        </div>
+
+        <div class="cta-box">
+            <h3>Ready to uncover your hidden revenue?</h3>
+            <p style="color: var(--text-muted); margin-bottom: 25px;">Stop guessing and start optimizing your data infrastructure today.</p>
+            <a href="index.html#contact" class="cta-btn">Book a Data Audit</a>
         </div>
     </article>
 
