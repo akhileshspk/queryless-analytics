@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: Market Basket Analysis for FreshRoute | QueryLess Analytics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ee6c4c;
+            --primary-dark: #d55d3e;
+            --section-bg: #F1F5F9;
+            --card-bg: #FFFFFF;
+            --text-main: #1F2937;
+            --text-muted: #64748B;
+            --white: #FFFFFF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; color: var(--text-main); background-color: var(--white); line-height: 1.8; }
+
+        /* --- NAVIGATION --- */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: #0F172A; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .logo i { color: var(--primary); font-size: 1.8rem; }
+        .logo span { color: var(--primary); }
+        .nav-links a { margin-left: 35px; text-decoration: none; color: var(--text-main); font-weight: 600; }
+        .btn-nav { background-color: var(--primary); color: var(--white) !important; padding: 10px 20px; border-radius: 6px; font-weight: 700; }
+
+        /* --- ARTICLE LAYOUT --- */
+        .article-container { max-width: 800px; margin: 150px auto 80px; padding: 0 5%; }
+        .category-tag { color: var(--primary); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
+        h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); line-height: 1.1; margin: 15px 0 30px; color: #0F172A; }
+        .lead { font-size: 1.4rem; color: var(--text-muted); margin-bottom: 40px; line-height: 1.5; }
+        
+        .content-section { margin-bottom: 50px; }
+        h2 { font-size: 1.8rem; margin-bottom: 20px; color: #0F172A; border-left: 4px solid var(--primary); padding-left: 20px; }
+        p { margin-bottom: 25px; font-size: 1.1rem; }
+        
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 40px 0; }
+        .stat-card { background: var(--section-bg); padding: 30px; border-radius: 12px; text-align: center; }
+        .stat-value { display: block; font-size: 2.5rem; font-weight: 800; color: var(--primary); }
+        .stat-label { color: var(--text-muted); font-weight: 600; }
+
+        /* --- FOUNDER BOX --- */
+        .founder-box { background: #0F172A; color: var(--white); padding: 40px; border-radius: 20px; margin-top: 80px; }
+        .founder-box h4 { color: var(--primary); text-transform: uppercase; margin-bottom: 10px; }
+
+        /* --- CTA BOX --- */
+        .cta-box { text-align: center; background: var(--section-bg); padding: 50px 30px; border-radius: 20px; margin-top: 60px; border: 1px solid #E2E8F0; }
+        .cta-box h3 { font-size: 1.8rem; color: #0F172A; margin-bottom: 20px; }
+        .cta-btn { background-color: var(--primary); color: var(--white); padding: 15px 30px; border-radius: 8px; font-weight: 700; text-decoration: none; display: inline-block; font-size: 1.1rem; transition: background-color 0.3s ease; }
+        .cta-btn:hover { background-color: var(--primary-dark); color: var(--white); }
+
+        footer { text-align: center; padding: 60px 5%; border-top: 1px solid #E2E8F0; margin-top: 60px; }
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 768px) {
+            nav { padding: 15px 5%; justify-content: space-between; }
+            .nav-links a:not([href="blog.html"]) { display: none !important; }
+            .nav-links { display: flex; align-items: center; }
+            .nav-links a[href="blog.html"] { margin-left: 0; font-size: 1rem; }
+            .logo { font-size: 1.1rem; }
+            .stat-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <link rel="icon" href="../favicon.ico" sizes="640x640">
+    <link rel="icon" type="image/png" href="../logo.png" sizes="640x640">
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+    <nav>
+        <a href="../index.html" class="logo">
+            <i class="fa-solid fa-chart-pie"></i>
+            QueryLess<span>Analytics</span>
+        </a>
+        <div class="nav-links">
+            <a href="../index.html#services">Capabilities</a>
+            <a href="../blog.html">Blog</a>
+            <a href="../index.html#contact" class="btn-nav">Data Audit</a>
+        </div>
+    </nav>
+
+    <article class="article-container">
+        <a href="../index.html" style="display: block; margin-bottom: 20px; color: var(--text-muted); text-decoration: none; font-weight: 600;">
+            <i class="fa-solid fa-arrow-left"></i> Back to Home
+        </a>
+
+        <span class="category-tag">Retail & Data Mining</span>
+        <h1>The Recommendation Engine: Increasing Revenue via Market Basket Analysis</h1>
+        <p class="lead">How FreshRoute Markets used association rule mining to discover hidden purchasing patterns and boost average order value by 18%.</p>
+
+        <div class="content-section">
+            <h2>The Business Problem</h2>
+            <p>FreshRoute Markets, a regional grocery chain, had plenty of data but zero insight into how customers navigated their aisles. Their promotions were generic, and their "Frequently Bought Together" online suggestions were based on simple popularity rather than actual purchasing relationships. They were leaving money on the table by failing to capitalize on the natural affinities between products.</p>
+        </div>
+
+        <div class="stat-grid">
+            <div class="stat-card">
+                <span class="stat-value">18%</span>
+                <span class="stat-label">Increase in AOV</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value">4.2x</span>
+                <span class="stat-label">Higher Promo ROI</span>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>The QueryLess Solution</h2>
+            <p>We implemented a <strong>Market Basket Analysis</strong> engine. We built a Python pipeline that ingested two years of transaction logs, identifying "Association Rules" with high confidence and lift. Instead of just knowing that people buy milk, we identified that customers buying artisanal sourdough were 75% more likely to purchase organic salted butter within the same trip.</p>
+            <p>We integrated these insights into an automated recommendation engine that powered their website and personalized weekly email flyers.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>The Result</h2>
+            <p>The impact was felt across the supply chain. By cross-merchandising items with high "lift" scores, FreshRoute saw an 18% increase in Average Order Value (AOV). Furthermore, their targeted promotions achieved a 4.2x higher ROI compared to their previous "one-size-fits-all" marketing strategy, significantly increasing net revenue without increasing customer acquisition costs.</p>
+        </div>
+
+        <div class="founder-box">
+            <h4>Founder's Perspective</h4>
+            <p><em>"Understanding the 'why' behind a purchase is the holy grail of retail. At Microsoft, I saw how large-scale data mining transformed digital stores. At QueryLess Analytics, we bring that same PhD-grade analytical rigor to help businesses understand exactly what their customers want next, even before they do."</em></p>
+            <p style="margin-top:20px; font-weight: 800;">— Akhilesh Khope, PhD</p>
+        </div>
+
+        <div class="cta-box">
+            <h3>Ready to uncover your hidden revenue?</h3>
+            <p style="color: var(--text-muted); margin-bottom: 25px;">Stop guessing and start optimizing your data infrastructure today.</p>
+            <a href="../index.html#contact" class="cta-btn">Book a Data Audit</a>
+        </div>
+    </article>
+
+    <footer>
+        <p>&copy; 2026 QueryLess Analytics. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scroll for internal links if added later
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
