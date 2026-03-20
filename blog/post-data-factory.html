@@ -75,6 +75,37 @@
             .nav-links a:not([href="blog.html"]) { display: none !important; }
             .logo { font-size: 1.1rem; }
         }
+
+        /* Add this to your existing <style> section */
+        .article-image-container {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .article-main-image {
+            width: 100%;
+            max-width: 1000px; /* Allows the image to breathe slightly outside the 800px text width */
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: block;
+            margin: 0 auto;
+        }
+
+        .image-caption {
+            margin-top: 15px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* Adjusting the article container to allow the image to be slightly wider than the text if desired */
+        @media (min-width: 1100px) {
+            .article-main-image {
+                /* margin-left: -10%; */
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -103,6 +134,11 @@
         <h1>The Modern Data Factory: Understanding Big Data, Pipelines, and Dashboards</h1>
         
         <p class="lead">In the modern business landscape, data is often compared to crude oil—it is immensely valuable, but only after it has been refined. For a company to turn raw information into profit, it needs a "factory" to process it.</p>
+
+        <div class="article-image-container">
+            <img src="../images/big-data-data-pipeline-dashboard.png" alt="The Modern Data Factory Diagram" class="article-main-image">
+            <p class="image-caption">The Flow of Data: From raw ingestion through automated pipelines to actionable decision-making.</p>
+        </div>
 
         <div class="content-section">
             <h2>1. What is Big Data?</h2>
