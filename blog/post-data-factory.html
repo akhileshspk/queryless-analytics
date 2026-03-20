@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Modern Data Factory: Big Data, Pipelines, and Dashboards | QueryLess Analytics</title>
+    
+    <meta name="description" content="Understand the building blocks of modern business intelligence. Learn what big data is, how pipelines move it, and how dashboards visualize it.">
+    <link rel="canonical" href="https://www.qanalytics.in/post-data-factory.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.qanalytics.in/post-data-factory.html">
+    <meta property="og:title" content="The Modern Data Factory: Big Data, Pipelines, and Dashboards | QueryLess Analytics">
+    <meta property="og:description" content="Understand the building blocks of modern business intelligence. Learn what big data is, how pipelines move it, and how dashboards visualize it.">
+    <meta property="og:image" content="https://www.qanalytics.in/images/big-data-data-pipeline-dashboard.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Modern Data Factory: Big Data, Pipelines, and Dashboards | QueryLess Analytics">
+    <meta name="twitter:description" content="Understand the building blocks of modern business intelligence. Learn what big data is, how pipelines move it, and how dashboards visualize it.">
+    <meta name="twitter:image" content="https://www.qanalytics.in/images/big-data-data-pipeline-dashboard.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ee6c4c;
+            --primary-dark: #d55d3e;
+            --section-bg: #F1F5F9;
+            --card-bg: #FFFFFF;
+            --text-main: #1F2937;
+            --text-muted: #64748B;
+            --white: #FFFFFF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; color: var(--text-main); background-color: var(--white); line-height: 1.8; }
+
+        /* --- NAVIGATION --- */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: #0F172A; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .logo i { color: var(--primary); font-size: 1.8rem; }
+        .logo span { color: var(--primary); }
+        .nav-links a { margin-left: 35px; text-decoration: none; color: var(--text-main); font-weight: 600; }
+        .btn-nav { background-color: var(--primary); color: var(--white) !important; padding: 10px 20px; border-radius: 6px; font-weight: 700; }
+
+        /* --- ARTICLE LAYOUT --- */
+        .article-container { max-width: 800px; margin: 150px auto 80px; padding: 0 5%; }
+        .category-tag { color: var(--primary); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
+        h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); line-height: 1.1; margin: 15px 0 30px; color: #0F172A; }
+        .lead { font-size: 1.4rem; color: var(--text-muted); margin-bottom: 40px; line-height: 1.5; }
+        
+        .content-section { margin-bottom: 50px; }
+        h2 { font-size: 1.8rem; margin-bottom: 20px; color: #0F172A; border-left: 4px solid var(--primary); padding-left: 20px; }
+        p { margin-bottom: 25px; font-size: 1.1rem; }
+        
+        .example-card { background: var(--section-bg); padding: 30px; border-radius: 12px; margin-bottom: 25px; }
+        .example-card h3 { color: #0F172A; margin-bottom: 10px; display: flex; align-items: center; gap: 12px; }
+        .example-card h3 i { color: var(--primary); }
+
+        /* --- FOUNDER BOX --- */
+        .founder-box { background: #0F172A; color: var(--white); padding: 40px; border-radius: 20px; margin-top: 80px; }
+        .founder-box h4 { color: var(--primary); text-transform: uppercase; margin-bottom: 15px; }
+        .founder-box p { font-style: italic; margin-bottom: 20px; opacity: 0.9; }
+
+        /* --- CTA BOX --- */
+        .cta-box { text-align: center; background: var(--section-bg); padding: 50px 30px; border-radius: 20px; margin-top: 60px; border: 1px solid #E2E8F0; }
+        .cta-box h3 { font-size: 1.8rem; color: #0F172A; margin-bottom: 20px; }
+        .cta-btn { background-color: var(--primary); color: var(--white); padding: 15px 30px; border-radius: 8px; font-weight: 700; text-decoration: none; display: inline-block; font-size: 1.1rem; transition: background-color 0.3s; }
+        .cta-btn:hover { background-color: var(--primary-dark); color: var(--white); }
+
+        footer { text-align: center; padding: 60px 5%; border-top: 1px solid #E2E8F0; margin-top: 60px; }
+
+        @media (max-width: 768px) {
+            nav { padding: 15px 5%; }
+            .nav-links a:not([href="blog.html"]) { display: none !important; }
+            .logo { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+    <link rel="icon" href="../favicon.ico" sizes="640x640">
+    <link rel="icon" type="image/png" href="../logo.png" sizes="640x640">
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+    <nav>
+        <a href="../index.html" class="logo">
+            <i class="fa-solid fa-chart-pie"></i>
+            QueryLess<span>Analytics</span>
+        </a>
+        <div class="nav-links">
+            <a href="../index.html#services">Capabilities</a>
+            <a href="../blog.html">Blog</a>
+            <a href="../index.html#pricing">Pricing</a>
+            <a href="../index.html#contact" class="btn-nav">Book a Data Audit</a>
+        </div>
+    </nav>
+
+    <article class="article-container">
+        <a href="../index.html" style="display: block; margin-bottom: 20px; color: var(--text-muted); text-decoration: none; font-weight: 600;">
+            <i class="fa-solid fa-arrow-left"></i> Back to Home
+        </a>
+
+        <span class="category-tag">Data Strategy</span>
+        <h1>The Modern Data Factory: Understanding Big Data, Pipelines, and Dashboards</h1>
+        
+        <p class="lead">In the modern business landscape, data is often compared to crude oil—it is immensely valuable, but only after it has been refined. For a company to turn raw information into profit, it needs a "factory" to process it.</p>
+
+        <div class="content-section">
+            <h2>1. What is Big Data?</h2>
+            <p>Big Data refers to the massive volumes of information that flood a business every second. It isn't just about the size; it's about the <strong>Variety</strong> (text, images, sensor logs), <strong>Velocity</strong> (how fast it arrives), and <strong>Veracity</strong> (how accurate it is).</p>
+            
+            <div class="example-card">
+                <h3><i class="fa-solid fa-database"></i> Big Data Examples:</h3>
+                <p><strong>Retail:</strong> Every barcode scan, loyalty card tap, and website click across 500 store locations.</p>
+                <p><strong>Manufacturing:</strong> Vibration and temperature readings sent from 1,000 factory sensors every millisecond.</p>
+                <p><strong>Social Media:</strong> Billions of likes, comments, and video views generated globally every single hour.</p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>2. What is a Data Pipeline?</h2>
+            <p>If data is the "oil," the Data Pipeline is the infrastructure that moves it from the ground to the refinery. It is an automated series of steps that cleans, organizes, and transports raw data to a place where it can be used.</p>
+
+            <div class="example-card">
+                <h3><i class="fa-solid fa-gears"></i> Data Pipeline Examples:</h3>
+                <p><strong>E-commerce:</strong> A system that automatically pulls "Add to Cart" events from your website and saves them into a sales database for analysis.</p>
+                <p><strong>Healthcare:</strong> A secure pipeline that collects heart rate data from wearable devices and sends it to a doctor’s portal in real-time.</p>
+                <p><strong>Finance:</strong> An automated process that gathers stock prices from global exchanges and merges them into one consistent file every minute.</p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>3. What are Dashboards?</h2>
+            <p>A dashboard is the "Flight Deck" of your business. It is a real-time visual display that pulls data from your pipelines and translates it into easy-to-read charts. It tells you the health of your company in seconds using simple color cues.</p>
+
+            <div class="example-card">
+                <h3><i class="fa-solid fa-chart-line"></i> Dashboard Examples:</h3>
+                <p><strong>Inventory:</strong> A grocery store dashboard that turns red when milk stock falls below 10 units, alerting the manager to restock.</p>
+                <p><strong>Marketing:</strong> A live display showing "Cost Per Lead," helping teams decide whether to increase or stop their current ad spend.</p>
+                <p><strong>Manufacturing:</strong> A screen on a factory floor flagging a 2-degree temperature spike before a motor fails.</p>
+            </div>
+        </div>
+
+        <div class="founder-box">
+            <h4>Founder’s Perspective</h4>
+            <p>"During my time at Microsoft and through my PhD research, I’ve seen that the most successful companies don't just 'have' data—they have flow. At QueryLess Analytics, we build the managed Python pipelines that connect your raw data to beautiful, actionable dashboards so you can stop wrestling with spreadsheets and start leading with clarity."</p>
+            <strong style="display: block;">— Akhilesh Khope, PhD</strong>
+        </div>
+
+        <div class="cta-box">
+            <h3>Ready to build your data factory?</h3>
+            <p>Don't let your data sit idle. Let’s build the automated pipelines and dashboards that turn your raw information into a growth engine.</p>
+            <a href="../index.html#contact" class="cta-btn">Book a Data Audit</a>
+        </div>
+    </article>
+
+    <footer>
+        <p>&copy; 2026 QueryLess Analytics. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
