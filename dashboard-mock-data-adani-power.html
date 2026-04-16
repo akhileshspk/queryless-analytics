@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adani Power: AI-Integrated Command Tower</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-base: #080c16;
+            --bg-card: #111827;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-green: #10b981;
+            --accent-orange: #f59e0b;
+            --accent-red: #ef4444;
+            --accent-purple: #8b5cf6;
+            --border-color: #1e293b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        header h1 { font-size: 1.6rem; color: var(--accent-cyan); }
+        .status-badge {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--accent-green);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .section-title {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-left: 3px solid var(--accent-cyan);
+            padding-left: 8px;
+        }
+
+        /* KPI Grids */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card h3 { font-size: 0.85rem; color: var(--text-muted); }
+        .card .value { font-size: 1.6rem; font-weight: bold; margin: 8px 0; }
+        .card .trend { font-size: 0.8rem; font-weight: 500; }
+        
+        .trend.up { color: var(--accent-green); }
+        .trend.down { color: var(--accent-red); }
+        .trend.neutral { color: var(--accent-orange); }
+
+        /* Charts Section */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .chart-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            height: 320px;
+            position: relative;
+        }
+
+        /* Alerts Section */
+        .alerts-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .alerts-panel h3 { color: var(--accent-orange); margin-bottom: 12px; font-size: 1rem; }
+        .alert-item {
+            border-left: 3px solid var(--accent-orange);
+            padding: 10px;
+            background: rgba(245, 158, 11, 0.05);
+            margin-bottom: 8px;
+            border-radius: 0 4px 4px 0;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+        .alert-time { font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 3px; }
+
+        @media (max-width: 1200px) { .charts-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <h1>Adani Power: Integrated Energy-Compute Tower</h1>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 4px;">Live Telemetry & AI Forecasting | Sovereign AI Stack 2026</p>
+        </div>
+        <div class="status-badge">● LIVE TELEMETRY</div>
+    </header>
+
+    <div class="section-title">Core Generation Vitals</div>
+    <div class="dashboard-grid">
+        <div class="card">
+            <h3>Plant Load Factor (PLF)</h3>
+            <div class="value" id="val-plf">72.4 %</div>
+            <div class="trend up" id="trend-plf">▲ Optimizing for Load</div>
+        </div>
+        <div class="card">
+            <h3>Heat Rate per Unit</h3>
+            <div class="value" id="val-heat">2,145 kCal</div>
+            <div class="trend up" id="trend-heat">▲ High Efficiency</div>
+        </div>
+        <div class="card">
+            <h3>Auxiliary Power Cons. (APC)</h3>
+            <div class="value" id="val-apc">8.2 %</div>
+            <div class="trend neutral">● Nominal Base</div>
+        </div>
+        <div class="card">
+            <h3>Coal Stock vs Proj. Demand</h3>
+            <div class="value" id="val-coal">14.1 Days</div>
+            <div class="trend down">▼ Deficit Risk (Weather)</div>
+        </div>
+    </div>
+
+    <div class="section-title">ESG & Compute Intelligence</div>
+    <div class="dashboard-grid">
+        <div class="card">
+            <h3>Real-Time GHG Intensity</h3>
+            <div class="value" id="val-ghg">785 g/kWh</div>
+            <div class="trend up">▲ 2% below strict baseline</div>
+        </div>
+        <div class="card">
+            <h3>Particulate Matter (PM2.5)</h3>
+            <div class="value" id="val-pm">42.1 mg/Nm³</div>
+            <div class="trend down" id="trend-pm">▼ ESP Scrubber Active</div>
+        </div>
+        <div class="card">
+            <h3>Water Positive Status</h3>
+            <div class="value" id="val-water">1.18x</div>
+            <div class="trend up">▲ Desalination running</div>
+        </div>
+        <div class="card">
+            <h3>Green Compute Efficiency</h3>
+            <div class="value" id="val-compute">88.5 %</div>
+            <div class="trend up" id="trend-compute">▲ Linked to Khavda Solar</div>
+        </div>
+    </div>
+
+    <div class="charts-grid">
+        <div class="chart-container">
+            <h3 style="color: var(--text-muted); margin-bottom: 10px; font-size: 0.85rem;">Electricity Demand & AI Forecasting (MW)</h3>
+            <canvas id="demandChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <h3 style="color: var(--text-muted); margin-bottom: 10px; font-size: 0.85rem;">Live Sensors: Turbine Vibration vs Boiler Temp</h3>
+            <canvas id="sensorChart"></canvas>
+        </div>
+    </div>
+
+    <div class="alerts-panel">
+        <h3>Autonomous Agent Log</h3>
+        <div id="alerts-container">
+            <div class="alert-item" style="border-left-color: var(--accent-purple); background: rgba(139, 92, 246, 0.1);">
+                <span class="alert-time">Agent Initialization</span>
+                <strong>[DEMAND FORECAST]</strong> ML models aligned. Grid demand predicted to spike by 300MW in next 30 minutes. Pre-ramping Tiroda Unit 2.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        Chart.defaults.color = '#94a3b8';
+        Chart.defaults.borderColor = '#1e293b';
+        Chart.defaults.font.family = "'Segoe UI', system-ui, sans-serif";
+
+        const generateTimeLabels = (count, startOffsetMin = 0, stepMin = 1) => {
+            const labels = [];
+            const now = new Date();
+            now.setMinutes(now.getMinutes() - startOffsetMin);
+            for (let i = 0; i < count; i++) {
+                labels.push(now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+                now.setMinutes(now.getMinutes() + stepMin);
+            }
+            return labels;
+        };
+
+        // --- CHART 1: DEMAND & FORECASTING ---
+        const demandCtx = document.getElementById('demandChart').getContext('2d');
+        const demandLabels = generateTimeLabels(12, 10, 5); // From -50 mins to +10 mins
+        
+        // Mock data: actual historical generation, actual demand, forecasted demand
+        const actualDemand = [14000, 14050, 14120, 14200, 14180, 14250, 14300, 14350, null, null, null, null];
+        const forecastDemand = [null, null, null, null, null, null, null, 14350, 14450, 14500, 14600, 14650];
+        
+        const demandChart = new Chart(demandCtx, {
+            type: 'line',
+            data: {
+                labels: demandLabels,
+                datasets: [
+                    {
+                        label: 'Actual Grid Demand',
+                        data: actualDemand,
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'AI Forecasted Demand',
+                        data: forecastDemand,
+                        borderColor: '#8b5cf6',
+                        borderDash: [5, 5],
+                        fill: false,
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { position: 'top', labels: { boxWidth: 12, font: { size: 10 } } } },
+                scales: { y: { min: 13800, max: 14800 } }
+            }
+        });
+
+        // --- CHART 2: SENSOR TELEMETRY ---
+        const sensorCtx = document.getElementById('sensorChart').getContext('2d');
+        const sensorLabels = Array.from({length: 20}, (_, i) => `-${20-i}s`);
+        
+        // Mock data
+        const vibrationData = Array.from({length: 20}, () => 2.5 + Math.random() * 0.5);
+        const tempData = Array.from({length: 20}, () => 535 + Math.random() * 5);
+
+        const sensorChart = new Chart(sensorCtx, {
+            type: 'line',
+            data: {
+                labels: sensorLabels,
+                datasets: [
+                    {
+                        label: 'Turbine Vibration (mm/s)',
+                        data: vibrationData,
+                        borderColor: '#ef4444',
+                        yAxisID: 'y',
+                        tension: 0.2,
+                        pointRadius: 0,
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Boiler Temp (°C)',
+                        data: tempData,
+                        borderColor: '#f59e0b',
+                        yAxisID: 'y1',
+                        tension: 0.3,
+                        pointRadius: 0,
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                animation: { duration: 0 }, // Turn off animation for live feel
+                plugins: { legend: { position: 'top', labels: { boxWidth: 12, font: { size: 10 } } } },
+                scales: {
+                    x: { grid: { display: false } },
+                    y: { type: 'linear', display: true, position: 'left', min: 0, max: 8, title: { display: true, text: 'Vibration', color: '#ef4444', font: {size: 10} } },
+                    y1: { type: 'linear', display: true, position: 'right', min: 500, max: 600, grid: { drawOnChartArea: false }, title: { display: true, text: 'Temp', color: '#f59e0b', font: {size: 10} } },
+                }
+            }
+        });
+
+        // --- SIMULATION ENGINE ---
+        function updateDashboard() {
+            // 1. Update Grid KPIs with micro-fluctuations
+            document.getElementById('val-plf').innerText = (72.0 + Math.random() * 0.8).toFixed(1) + ' %';
+            document.getElementById('val-heat').innerText = (2140 + Math.floor(Math.random() * 10)).toLocaleString() + ' kCal';
+            document.getElementById('val-apc').innerText = (8.1 + Math.random() * 0.2).toFixed(1) + ' %';
+            document.getElementById('val-ghg').innerText = (780 + Math.floor(Math.random() * 10)) + ' g/kWh';
+            
+            let pmValue = 42.0 + (Math.random() * 3 - 1.5);
+            document.getElementById('val-pm').innerText = pmValue.toFixed(1) + ' mg/Nm³';
+            if(pmValue > 44) document.getElementById('trend-pm').innerHTML = '▼ Warning: Scrubber Limit';
+            else document.getElementById('trend-pm').innerHTML = '▼ ESP Scrubber Active';
+
+            document.getElementById('val-compute').innerText = (88.0 + Math.random() * 1.5).toFixed(1) + ' %';
+
+            // 2. Update Sensor Chart (Fast Telemetry)
+            sensorChart.data.datasets[0].data.shift();
+            let newVib = 2.5 + Math.random() * 0.5;
+            // Occasional vibration spike logic
+            if(Math.random() > 0.95) newVib += 2.0; 
+            sensorChart.data.datasets[0].data.push(newVib);
+
+            sensorChart.data.datasets[1].data.shift();
+            sensorChart.data.datasets[1].data.push(535 + Math.random() * 5);
+            sensorChart.update();
+
+            // 3. Agentic Alerts based on thresholds
+            if (newVib > 4.0) {
+                triggerAlert('red', 'PREDICTIVE MAINTENANCE', `Turbine vibration spiked to ${newVib.toFixed(2)} mm/s. LSTM model indicates 85% probability of bearing wear. Auto-logging diagnostics.`);
+            }
+            if (Math.random() > 0.98) {
+                triggerAlert('cyan', 'WATER MANAGEMENT', 'Desalination unit flow optimized. Water Positive ratio sustained above 1.15x despite high load.');
+            }
+        }
+
+        function triggerAlert(colorHex, type, message) {
+            const container = document.getElementById('alerts-container');
+            const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit", second: "2-digit" });
+            const colorMap = { 'red': '#ef4444', 'cyan': '#06b6d4', 'green': '#10b981' };
+            const hex = colorMap[colorHex] || '#f59e0b';
+
+            const alertHtml = `
+                <div class="alert-item" style="border-left-color: ${hex}; background: rgba(255,255,255,0.02);">
+                    <span class="alert-time">${now}</span>
+                    <strong style="color: ${hex}">[${type}]</strong> ${message}
+                </div>
+            `;
+            container.insertAdjacentHTML('afterbegin', alertHtml);
+            if (container.children.length > 6) container.removeChild(container.lastChild);
+        }
+
+        // Run sensor simulation every 1.5 seconds
+        setInterval(updateDashboard, 1500);
+
+        // Slow simulation for demand chart (Simulates updating every few minutes)
+        setInterval(() => {
+            const lastActual = demandChart.data.datasets[0].data[7];
+            const newActual = lastActual + (Math.random() * 60 - 20); // Walk upward mostly
+            
+            demandChart.data.datasets[0].data.shift();
+            demandChart.data.datasets[0].data[7] = newActual;
+            
+            // Re-align forecast
+            demandChart.data.datasets[1].data[7] = newActual;
+            for(let i=8; i<12; i++) {
+                demandChart.data.datasets[1].data[i] = demandChart.data.datasets[1].data[i-1] + 40 + Math.random()*20;
+            }
+            
+            demandChart.update();
+        }, 10000);
+    </script>
+</body>
+</html>
