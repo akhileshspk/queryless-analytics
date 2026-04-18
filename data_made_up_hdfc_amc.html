@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HDFC AMC: Strategic Intelligence Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-base: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --hdfc-blue: #023b73; /* HDFC Corporate Blue */
+            --hdfc-red: #ed1c24;  /* HDFC Corporate Red */
+            --accent-cyan: #06b6d4;
+            --accent-green: #10b981;
+            --border-color: #334155;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--hdfc-red);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        header h1 { font-size: 1.8rem; color: var(--text-main); }
+        header span { color: var(--hdfc-red); font-weight: bold; }
+
+        /* Top KPIs */
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .kpi-card {
+            background: var(--bg-card);
+            border-left: 4px solid var(--hdfc-red);
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .kpi-card h3 { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; }
+        .kpi-card .value { font-size: 1.8rem; font-weight: bold; margin-top: 5px; color: var(--accent-cyan); }
+
+        /* Main Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card h3 { font-size: 1rem; margin-bottom: 15px; color: var(--text-main); border-bottom: 1px solid var(--border-color); padding-bottom: 8px;}
+        .chart-container { position: relative; height: 250px; width: 100%; }
+
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        th, td { padding: 8px; text-align: left; border-bottom: 1px solid var(--border-color); }
+        th { color: var(--text-muted); font-weight: 600; }
+        .risk-high { color: #ef4444; font-weight: bold; }
+        .risk-med { color: #f59e0b; font-weight: bold; }
+
+        /* Controls */
+        .controls { margin-bottom: 15px; display: flex; gap: 10px; align-items: center;}
+        select { background: var(--bg-base); color: var(--text-main); border: 1px solid var(--border-color); padding: 8px; border-radius: 4px; }
+        
+        .full-width { grid-column: 1 / -1; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <h1><span>HDFC</span> AMC Dashboard</h1>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Quantitative Investor Intelligence & Portfolio Analytics</p>
+        </div>
+    </header>
+
+    <div class="kpi-row">
+        <div class="kpi-card">
+            <h3>Total Assets Under Management</h3>
+            <div class="value">₹ 5.42 Lakh Cr</div>
+        </div>
+        <div class="kpi-card">
+            <h3>Avg Tracking Error (Equity)</h3>
+            <div class="value">0.85%</div>
+        </div>
+        <div class="kpi-card">
+            <h3>Overall SIP Stoppage Rate</h3>
+            <div class="value" style="color: #ef4444;">4.2%</div>
+        </div>
+    </div>
+
+    <div class="dashboard-grid">
+        
+        <div class="card">
+            <h3>Total Amount Invested vs. Age</h3>
+            <div class="chart-container"><canvas id="amtVsAgeChart"></canvas></div>
+        </div>
+        
+        <div class="card">
+            <h3>Number of Investors vs. Age</h3>
+            <div class="chart-container"><canvas id="invVsAgeChart"></canvas></div>
+        </div>
+
+        <div class="card">
+            <h3>Investment Amount Distribution (Histogram)</h3>
+            <div class="chart-container"><canvas id="histogramChart"></canvas></div>
+        </div>
+
+        <div class="card">
+            <h3>Investor Gender Breakdown</h3>
+            <div class="chart-container" style="height: 200px;"><canvas id="genderChart"></canvas></div>
+        </div>
+
+        <div class="card">
+            <h3>Amount Invested vs. State (Top 5)</h3>
+            <div class="chart-container"><canvas id="stateChart"></canvas></div>
+        </div>
+
+        <div class="card">
+            <h3>Amount Invested vs. District (Goa & MH)</h3>
+            <div class="chart-container"><canvas id="districtChart"></canvas></div>
+        </div>
+
+        <div class="card">
+            <h3>Amount Invested vs. Taluka (Goa)</h3>
+            <div class="chart-container"><canvas id="talukaChart"></canvas></div>
+        </div>
+
+        <div class="card full-width" style="border-top: 3px solid var(--hdfc-red);">
+            <div class="controls">
+                <label for="mfSelector"><strong>Analyze Mutual Fund:</strong></label>
+                <select id="mfSelector" onchange="updateInteractiveCharts()">
+                    <option value="top100">HDFC Top 100 Fund</option>
+                    <option value="midcap">HDFC Mid-Cap Opportunities</option>
+                    <option value="smallcap">HDFC Small Cap Fund</option>
+                </select>
+            </div>
+            
+            <div class="dashboard-grid" style="margin-bottom: 0;">
+                <div class="card" style="border: none; padding: 0;">
+                    <h3>Nifty 50 vs. Selected Mutual Fund</h3>
+                    <div class="chart-container"><canvas id="niftyCompareChart"></canvas></div>
+                </div>
+                <div class="card" style="border: none; padding: 0;">
+                    <h3>Fund Drawdowns (%)</h3>
+                    <div class="chart-container"><canvas id="drawdownChart"></canvas></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>SIP Stoppage Rate by Mutual Fund</h3>
+            <div class="chart-container"><canvas id="sipStoppageChart"></canvas></div>
+        </div>
+
+        <div class="card">
+            <h3>Popular Funds by Age Group</h3>
+            <table>
+                <tr><th>Age Group</th><th>Top Mutual Fund</th><th>AUM Share</th></tr>
+                <tr><td>18 - 25</td><td>HDFC Small Cap Fund</td><td>45%</td></tr>
+                <tr><td>26 - 40</td><td>HDFC Flexi Cap Fund</td><td>38%</td></tr>
+                <tr><td>41 - 55</td><td>HDFC Balanced Advantage</td><td>42%</td></tr>
+                <tr><td>56+</td><td>HDFC Liquid Fund</td><td>55%</td></tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>Popular Funds by Taluka (Goa)</h3>
+            <table>
+                <tr><th>Taluka</th><th>Top Mutual Fund</th><th>Dominant Profile</th></tr>
+                <tr><td>Tiswadi</td><td>HDFC Flexi Cap Fund</td><td>Salaried Pro</td></tr>
+                <tr><td>Salcete</td><td>HDFC Balanced Adv.</td><td>NRI Remittance</td></tr>
+                <tr><td>Bardez</td><td>HDFC Top 100 Fund</td><td>Business Owners</td></tr>
+                <tr><td>Ponda</td><td>HDFC Mid-Cap Opp.</td><td>Industrial/Retail</td></tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>AMC Revenue Generated by Fund</h3>
+            <table>
+                <tr><th>Mutual Fund</th><th>Total AUM (Cr)</th><th>Est. AMC Revenue (Cr)</th></tr>
+                <tr><td>HDFC Mid-Cap Opp.</td><td>₹ 55,000</td><td>₹ 412.5</td></tr>
+                <tr><td>HDFC Flexi Cap</td><td>₹ 48,000</td><td>₹ 360.0</td></tr>
+                <tr><td>HDFC Liquid Fund</td><td>₹ 72,000</td><td>₹ 108.0</td></tr>
+                <tr><td>HDFC Small Cap</td><td>₹ 28,000</td><td>₹ 210.0</td></tr>
+            </table>
+        </div>
+
+        <div class="card full-width">
+            <h3 style="color: #ef4444;">[ML PREDICTION] High-Risk Investor Churn Log</h3>
+            <table>
+                <tr>
+                    <th>Investor ID</th>
+                    <th>Current AUM</th>
+                    <th>Primary Holding</th>
+                    <th>SIP Status</th>
+                    <th>Last Login</th>
+                    <th>Churn Probability</th>
+                    <th>Agentic Nudge Action</th>
+                </tr>
+                <tr>
+                    <td>INV-88392</td>
+                    <td>₹ 45.2 Lakhs</td>
+                    <td>HDFC Top 100</td>
+                    <td><span style="color: #ef4444;">Stopped (2d ago)</span></td>
+                    <td>45 days ago</td>
+                    <td><span class="risk-high">92%</span></td>
+                    <td>Auto-dispatch RM for portfolio review.</td>
+                </tr>
+                <tr>
+                    <td>INV-11024</td>
+                    <td>₹ 12.5 Lakhs</td>
+                    <td>HDFC Mid-Cap</td>
+                    <td>Active</td>
+                    <td>60 days ago</td>
+                    <td><span class="risk-med">74%</span></td>
+                    <td>Send automated market re-assurance email.</td>
+                </tr>
+                <tr>
+                    <td>INV-55912</td>
+                    <td>₹ 1.8 Crores</td>
+                    <td>HDFC Balanced</td>
+                    <td><span style="color: #ef4444;">Stopped (1w ago)</span></td>
+                    <td>2 days ago</td>
+                    <td><span class="risk-high">88%</span></td>
+                    <td>Flag to Wealth Management HNI Desk.</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <script>
+        // Global Chart Defaults
+        Chart.defaults.color = '#94a3b8';
+        Chart.defaults.borderColor = '#334155';
+
+        const createChart = (id, type, labels, dataSets, options = {}) => {
+            return new Chart(document.getElementById(id).getContext('2d'), {
+                type: type,
+                data: { labels: labels, datasets: dataSets },
+                options: { responsive: true, maintainAspectRatio: false, ...options }
+            });
+        };
+
+        // 1. Demographics
+        createChart('amtVsAgeChart', 'bar', ['18-25', '26-35', '36-45', '46-55', '56+'], [
+            { label: 'Amount Invested (₹ Crores)', data: [1200, 8500, 14200, 18500, 11800], backgroundColor: '#06b6d4' }
+        ]);
+
+        createChart('invVsAgeChart', 'bar', ['18-25', '26-35', '36-45', '46-55', '56+'], [
+            { label: 'Number of Investors (Lakhs)', data: [4.2, 12.5, 8.8, 5.1, 2.3], backgroundColor: '#8b5cf6' }
+        ]);
+
+        createChart('histogramChart', 'bar', ['0-1L', '1L-5L', '5L-20L', '20L-1Cr', '1Cr+'], [
+            { label: 'Investor Count', data: [1500000, 850000, 420000, 120000, 25000], backgroundColor: '#10b981', barPercentage: 1.0, categoryPercentage: 1.0 }
+        ]);
+
+        createChart('genderChart', 'doughnut', ['Male', 'Female', 'Corporate/Other'], [
+            { data: [62, 35, 3], backgroundColor: ['#3b82f6', '#ec4899', '#f59e0b'], borderWidth: 0 }
+        ]);
+
+        // 2. Geography
+        createChart('stateChart', 'bar', ['Maharashtra', 'Gujarat', 'Delhi', 'Karnataka', 'Tamil Nadu'], [
+            { label: 'AUM (₹ Crores)', data: [145000, 82000, 65000, 58000, 42000], backgroundColor: '#f59e0b' }
+        ]);
+
+        createChart('districtChart', 'bar', ['Mumbai', 'Pune', 'North Goa', 'South Goa', 'Thane'], [
+            { label: 'AUM (₹ Crores)', data: [85000, 32000, 4500, 3800, 18000], backgroundColor: '#ed1c24' }
+        ]);
+
+        createChart('talukaChart', 'bar', ['Tiswadi', 'Salcete', 'Bardez', 'Ponda', 'Mormugao'], [
+            { label: 'Amount Invested (₹ Crores)', data: [1800, 1650, 1400, 850, 600], backgroundColor: '#023b73' }
+        ]);
+
+        createChart('sipStoppageChart', 'bar', ['Liquid', 'Top 100', 'Flexi Cap', 'Mid-Cap', 'Small Cap'], [
+            { label: 'Stoppage Rate (%)', data: [1.2, 3.5, 4.1, 5.8, 7.2], backgroundColor: '#ef4444' }
+        ]);
+
+        // 3. Interactive Performance Charts
+        const performanceData = {
+            top100: { mf: [100, 105, 108, 104, 112, 118], dd: [0, -2, -1, -5, 0, 0] },
+            midcap: { mf: [100, 108, 115, 105, 122, 135], dd: [0, -1, 0, -12, -2, 0] },
+            smallcap:{ mf: [100, 112, 125, 102, 130, 150], dd: [0, 0, -3, -22, -5, 0] }
+        };
+        const niftyData = [100, 104, 106, 103, 109, 114];
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+
+        let compareChart, ddChart;
+
+        function initInteractiveCharts() {
+            compareChart = new Chart(document.getElementById('niftyCompareChart').getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: months,
+                    datasets: [
+                        { label: 'Nifty 50', data: niftyData, borderColor: '#94a3b8', borderDash: [5, 5], fill: false },
+                        { label: 'Selected MF', data: performanceData.top100.mf, borderColor: '#06b6d4', fill: false, tension: 0.1 }
+                    ]
+                }, options: { responsive: true, maintainAspectRatio: false }
+            });
+
+            ddChart = new Chart(document.getElementById('drawdownChart').getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: months,
+                    datasets: [{ label: 'Drawdown (%)', data: performanceData.top100.dd, borderColor: '#ef4444', backgroundColor: 'rgba(239, 68, 68, 0.1)', fill: true, tension: 0.1 }]
+                }, options: { responsive: true, maintainAspectRatio: false }
+            });
+        }
+
+        function updateInteractiveCharts() {
+            const selected = document.getElementById('mfSelector').value;
+            compareChart.data.datasets[1].data = performanceData[selected].mf;
+            compareChart.update();
+            ddChart.data.datasets[0].data = performanceData[selected].dd;
+            ddChart.update();
+        }
+
+        initInteractiveCharts();
+    </script>
+</body>
+</html>
