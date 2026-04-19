@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Local Europe - Personalized Feed</title>
+    <style>
+        :root {
+            --eu-blue: #003399;
+            --eu-yellow: #FFCC00;
+            --text-dark: #1a1a1a;
+            --text-muted: #666666;
+            --bg-page: #f4f6f8;
+            --bg-card: #ffffff;
+            --border-color: #e2e8f0;
+            --radius: 8px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Mobile-First Header */
+        header {
+            background-color: var(--eu-blue);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid var(--eu-yellow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 { font-size: 1.4rem; letter-spacing: -0.5px; }
+        .ai-status { font-size: 0.85rem; color: var(--eu-yellow); font-weight: bold; }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        /* Control Panel */
+        .engine-controls {
+            background: var(--bg-card);
+            padding: 15px;
+            border-radius: var(--radius);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .engine-controls label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+        }
+
+        .engine-controls select {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            background-color: #f8fafc;
+            color: var(--text-dark);
+            cursor: pointer;
+        }
+
+        /* Reasoning Panel */
+        .reasoning-panel {
+            background-color: #e0f2fe;
+            border-left: 4px solid #0284c7;
+            padding: 15px;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+        }
+        .reasoning-panel strong { color: #0369a1; }
+
+        /* Article Grid */
+        .section-header {
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        /* Article Card */
+        .article-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .article-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+
+        .img-placeholder {
+            height: 160px;
+            background-color: #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .article-content {
+            padding: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .article-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--eu-blue);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            background: #eff6ff;
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            align-self: flex-start;
+        }
+
+        .match-score {
+            font-size: 0.75rem;
+            color: #059669;
+            font-weight: 700;
+            float: right;
+        }
+
+        .article-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .article-excerpt {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .read-btn {
+            display: block;
+            text-align: center;
+            background-color: transparent;
+            color: var(--eu-blue);
+            border: 1px solid var(--eu-blue);
+            padding: 10px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .read-btn:hover {
+            background-color: var(--eu-blue);
+            color: white;
+        }
+
+        /* Loading State */
+        .loader {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            color: var(--eu-blue);
+            font-weight: bold;
+        }
+
+        /* Desktop Adjustments */
+        @media (min-width: 768px) {
+            .engine-controls {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+            .engine-controls label { margin-bottom: 0; white-space: nowrap; }
+            .engine-controls select { max-width: 400px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>The Local <span style="font-weight: 300;">Europe</span></h1>
+        <div class="ai-status">⚡ AI Feed Active</div>
+    </header>
+
+    <main class="container">
+        
+        <div class="engine-controls">
+            <label for="personaSelector">Simulate Reader Profile:</label>
+            <select id="personaSelector" onchange="updateFeed()">
+                <option value="anonymous">Anonymous Visitor (European Top Stories)</option>
+                <option value="expat_de">Expat in Germany (Work & Integration)</option>
+                <option value="property_es">Property Buyer in Spain (Visas & Real Estate)</option>
+                <option value="eu_policy">EU Policy Follower (Brussels & Politics)</option>
+            </select>
+        </div>
+
+        <div class="reasoning-panel" id="reasoningPanel">
+            <strong>Agentic Logic: Trend-Based Baseline</strong><br>
+            Perception: Unregistered user from a European IP address.<br>
+            Action: Serving high-velocity regional news based on click-through rates over the last 6 hours.
+        </div>
+
+        <div class="section-header">
+            Recommended For You
+        </div>
+        
+        <div class="loader" id="loader">Recalculating Feed based on new vector embeddings...</div>
+
+        <div class="article-grid" id="articleGrid">
+            </div>
+
+    </main>
+
+    <script>
+        // --- 1. MOCK DATABASE (News Articles) ---
+        const newsDatabase = {
+            anonymous: [
+                { id: 1, title: "Schengen border checks extended into summer", excerpt: "Multiple EU states announce they will maintain internal border controls citing security concerns.", tag: "Travel", match: "98%", img: "Border Control" },
+                { id: 2, title: "Heatwave warnings issued across Southern Europe", excerpt: "Temperatures expected to break records in Italy, Greece, and Spain this weekend.", tag: "Weather", match: "95%", img: "Sunny Cityscape" },
+                { id: 3, title: "Euro drops against the Dollar ahead of ECB meeting", excerpt: "Markets anticipate a potential interest rate cut as inflation stabilizes.", tag: "Economy", match: "89%", img: "Euro Banknotes" }
+            ],
+            expat_de: [
+                { id: 4, title: "How Germany's new citizenship law affects expats", excerpt: "Dual nationality is now easier to obtain. Here is a step-by-step guide to the new application process.", tag: "Integration", match: "99%", img: "German Passport" },
+                { id: 5, title: "DB announces new wave of train strikes for Friday", excerpt: "Commuters warned to seek alternative transport as the GDL union calls for a 24-hour walkout.", tag: "Transport", match: "94%", img: "Train Station" },
+                { id: 6, title: "Top 5 English-speaking tech startups hiring in Berlin", excerpt: "Looking for a career change? These companies are actively recruiting international talent.", tag: "Careers", match: "88%", img: "Office Space" }
+            ],
+            property_es: [
+                { id: 7, title: "Spain's Golden Visa officially abolished: What next?", excerpt: "The government ends the real estate investment route to residency. Here are the alternative options.", tag: "Immigration", match: "99%", img: "Spanish Coast" },
+                { id: 8, title: "Where property prices are dropping in Andalusia", excerpt: "Our latest market analysis shows unexpected cooling in these popular coastal towns.", tag: "Real Estate", match: "96%", img: "Villa" },
+                { id: 9, title: "A guide to the 'Beckham Law' tax regime for 2026", excerpt: "How foreign workers and digital nomads can cap their income tax in Spain.", tag: "Finance", match: "92%", img: "Tax Forms" }
+            ],
+            eu_policy: [
+                { id: 10, title: "AI Act enters into force: What businesses need to know", excerpt: "The world's first comprehensive AI legislation is now active. Are your compliance systems ready?", tag: "Tech Policy", match: "98%", img: "Digital Network" },
+                { id: 11, title: "Farming subsidies at the heart of Brussels protests", excerpt: "Tractors block the European Quarter as agricultural unions demand revisions to the Green Deal.", tag: "Politics", match: "95%", img: "EU Flags" },
+                { id: 1, title: "Schengen border checks extended into summer", excerpt: "Multiple EU states announce they will maintain internal border controls citing security concerns.", tag: "Travel", match: "87%", img: "Border Control" }
+            ]
+        };
+
+        const reasoningData = {
+            anonymous: {
+                title: "Agentic Logic: Trend-Based Baseline",
+                text: "<strong>Perception:</strong> Unregistered user from a European IP address.<br><strong>Action:</strong> Serving high-velocity regional news based on click-through rates over the last 6 hours."
+            },
+            expat_de: {
+                title: "Agentic Logic: Recommendation Engine",
+                text: "<strong>Perception:</strong> User history shows sustained engagement with 'Living in Germany' guides and employment law.<br><strong>Action:</strong> Prioritizing Berlin-centric practical journalism and public transport utility news."
+            },
+            property_es: {
+                title: "Agentic Logic: Recommendation Engine",
+                text: "<strong>Perception:</strong> User recently searched for 'non-lucrative visa requirements' and 'Andalusia taxes'.<br><strong>Action:</strong> Mapping recommendations to the 'Relocation & Investment' content cluster. Suppressing general political news."
+            },
+            eu_policy: {
+                title: "Agentic Logic: Recommendation Engine",
+                text: "<strong>Perception:</strong> User frequently reads articles tagged with 'European Commission' and 'Regulation'.<br><strong>Action:</strong> Using NLP similarity scores to surface deep-dive policy analysis and legislative tracking."
+            }
+        };
+
+        // --- 2. RENDER ENGINE ---
+        function renderArticles(persona) {
+            const grid = document.getElementById('articleGrid');
+            grid.innerHTML = ''; 
+
+            newsDatabase[persona].forEach(article => {
+                const card = `
+                    <article class="article-card">
+                        <div class="img-placeholder">[Image: ${article.img}]</div>
+                        <div class="article-content">
+                            <div>
+                                <span class="article-tag">${article.tag}</span>
+                                <span class="match-score">${article.match} Match</span>
+                            </div>
+                            <h3 class="article-title">${article.title}</h3>
+                            <p class="article-excerpt">${article.excerpt}</p>
+                            <a href="#" class="read-btn" onclick="event.preventDefault();">Read Full Article</a>
+                        </div>
+                    </article>
+                `;
+                grid.innerHTML += card;
+            });
+        }
+
+        function updateReasoning(persona) {
+            const panel = document.getElementById('reasoningPanel');
+            panel.innerHTML = `
+                <strong>${reasoningData[persona].title}</strong><br>
+                ${reasoningData[persona].text}
+            `;
+        }
+
+        // --- 3. INTERACTIVITY ---
+        function updateFeed() {
+            const persona = document.getElementById('personaSelector').value;
+            const grid = document.getElementById('articleGrid');
+            const loader = document.getElementById('loader');
+
+            // Simulate UI transition and network request
+            grid.style.display = 'none';
+            loader.style.display = 'block';
+
+            setTimeout(() => {
+                loader.style.display = 'none';
+                grid.style.display = 'grid';
+                renderArticles(persona);
+                updateReasoning(persona);
+            }, 450); // Simulated latency
+        }
+
+        // Initialize default view
+        renderArticles('anonymous');
+    </script>
+</body>
+</html>
