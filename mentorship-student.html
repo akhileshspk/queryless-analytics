@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Mentorship Registration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-slate-100 flex items-center justify-center min-h-screen p-4 font-sans text-slate-800">
+
+    <div class="glass-card w-full max-w-lg p-6 sm:p-8 rounded-2xl">
+        <div class="text-center mb-6 sm:mb-8 border-b border-slate-200 pb-6">
+            <div class="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-4 text-emerald-600">
+                <i class="ph-fill ph-student text-3xl"></i>
+            </div>
+            <h1 class="text-xl sm:text-2xl font-bold text-slate-900 mb-2">Mentorship Program</h1>
+            <p class="text-slate-500 text-sm px-2">Register to be paired with an industry alumni mentor.</p>
+        </div>
+
+        <form id="studentMentorshipForm" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs sm:text-sm font-bold mb-1 text-slate-700">Full Name</label>
+                    <input type="text" name="name" required class="w-full p-3 border border-slate-200 rounded-xl bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 outline-none text-sm transition">
+                </div>
+                <div>
+                    <label class="block text-xs sm:text-sm font-bold mb-1 text-slate-700">University Email</label>
+                    <input type="email" name="email" required class="w-full p-3 border border-slate-200 rounded-xl bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 outline-none text-sm transition">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs sm:text-sm font-bold mb-1 text-slate-700">Roll Number</label>
+                    <input type="text" name="roll_no" required class="w-full p-3 border border-slate-200 rounded-xl bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 outline-none text-sm transition">
+                </div>
+                <div>
+                    <label class="block text-xs sm:text-sm font-bold mb-1 text-slate-700">Major / Degree</label>
+                    <input type="text" name="major" placeholder="e.g. Computer Science" required class="w-full p-3 border border-slate-200 rounded-xl bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 outline-none text-sm transition">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs sm:text-sm font-bold mb-1 text-slate-700">Target Job Role</label>
+                <input type="text" name="target_role" placeholder="What role are you aiming for? (e.g. Software Engineer)" required class="w-full p-3 border border-slate-200 rounded-xl bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 outline-none text-sm transition">
+            </div>
+
+            <div>
+                <label class="block text-xs sm:text-sm font-bold mb-1 text-slate-700">Preferred Location</label>
+                <input type="text" name="preferred_location" placeholder="e.g. Bangalore, Remote" required class="w-full p-3 border border-slate-200 rounded-xl bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 outline-none text-sm transition">
+            </div>
+
+            <button type="submit" id="submitBtn" class="w-full bg-emerald-600 text-white font-bold py-3 sm:py-4 rounded-xl hover:bg-emerald-700 transition mt-6 flex items-center justify-center gap-2">
+                <span>Join Mentorship Drive</span>
+                <i class="ph-bold ph-arrow-right"></i>
+            </button>
+        </form>
+
+        <div id="successMessage" class="hidden mt-6 bg-emerald-50 text-emerald-700 p-6 rounded-xl text-center border border-emerald-200">
+            <i class="ph-fill ph-check-circle text-4xl mb-2 text-emerald-500"></i>
+            <p class="font-bold text-lg">Registration Successful!</p>
+            <p class="text-sm mt-1 text-emerald-600">You will receive an email once you are paired with a mentor.</p>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = "https://www.webtoolsbackend.com"; // Change to http://127.0.0.1:5000 for local dev
+        const urlParams = new URLSearchParams(window.location.search);
+        const programId = urlParams.get('program');
+
+        if (!programId) {
+            document.getElementById('studentMentorshipForm').innerHTML = `
+                <div class="bg-rose-50 p-4 rounded-xl border border-rose-200 text-center">
+                    <i class="ph-fill ph-warning-circle text-3xl text-rose-500 mb-2"></i>
+                    <p class="text-rose-700 font-bold text-sm">Invalid Program Link</p>
+                    <p class="text-rose-600 text-xs mt-1">Please contact your placement cell for the correct URL.</p>
+                </div>
+            `;
+        }
+
+        document.getElementById('studentMentorshipForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if(!programId) return;
+
+            const btn = document.getElementById('submitBtn');
+            btn.innerHTML = '<i class="ph-bold ph-spinner animate-spin"></i> <span>Submitting...</span>';
+            btn.disabled = true;
+
+            try {
+                // Submit to the specific mentorship student route
+                const response = await fetch(`${API_BASE}/api/mentorship/campaigns/${programId}/student`, {
+                    method: 'POST',
+                    body: new FormData(e.target)
+                });
+                
+                if(response.ok) {
+                    document.getElementById('studentMentorshipForm').classList.add('hidden');
+                    document.getElementById('successMessage').classList.remove('hidden');
+                } else {
+                    const data = await response.json();
+                    alert(`Error: ${data.error || 'Submission failed'}`);
+                }
+            } catch (err) {
+                alert("Server error. Please check your connection.");
+            }
+            
+            btn.innerHTML = '<span>Join Mentorship Drive</span> <i class="ph-bold ph-arrow-right"></i>';
+            btn.disabled = false;
+        });
+    </script>
+</body>
+</html>
