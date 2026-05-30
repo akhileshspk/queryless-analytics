@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Data Collection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 flex items-center justify-center min-h-screen p-4 font-sans text-slate-800">
+
+    <div class="bg-white w-full max-w-md p-8 rounded-2xl shadow-xl border border-slate-200">
+        <div class="text-center mb-8">
+            <h1 class="text-2xl font-bold text-indigo-600 mb-2">Placement Drive Upload</h1>
+            <p class="text-slate-500 text-sm">Please submit your details and latest resume.</p>
+        </div>
+
+        <form id="studentForm" class="space-y-4">
+            <div>
+                <label class="block text-sm font-bold mb-1">Full Name</label>
+                <input type="text" name="name" required class="w-full p-3 border rounded-xl bg-slate-50">
+            </div>
+            
+            <div>
+                <label class="block text-sm font-bold mb-1">University Email</label>
+                <input type="email" name="email" required class="w-full p-3 border rounded-xl bg-slate-50">
+            </div>
+
+            <div>
+                <label class="block text-sm font-bold mb-1">Roll Number</label>
+                <input type="text" name="roll_no" required class="w-full p-3 border rounded-xl bg-slate-50">
+            </div>
+
+            <div>
+                <label class="block text-sm font-bold mb-1">Resume (PDF Only)</label>
+                <input type="file" name="resume" accept="application/pdf" required class="w-full p-3 border rounded-xl bg-slate-50 cursor-pointer">
+            </div>
+
+            <button type="submit" id="submitBtn" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl hover:bg-indigo-700 transition mt-4">
+                Submit Profile
+            </button>
+        </form>
+
+        <div id="successMessage" class="hidden mt-6 bg-green-50 text-green-700 p-4 rounded-xl text-center border border-green-200">
+            <p class="font-bold">✅ Submitted Successfully!</p>
+            <p class="text-sm mt-1">Your data has been secured.</p>
+        </div>
+    </div>
+
+    <script>
+        // Extract the unique Campaign ID from the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const campaignId = urlParams.get('campaign');
+
+        if (!campaignId) {
+            document.getElementById('studentForm').innerHTML = "<p class='text-red-500 text-center font-bold'>Error: Invalid Campaign Link. Please contact the placement cell.</p>";
+            document.getElementById('submitBtn').style.display = 'none';
+        }
+
+        document.getElementById('studentForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.innerText = "Uploading to Secure Storage...";
+            btn.disabled = true;
+
+            try {
+                // Send data directly to the backend storage
+                const response = await fetch(`http://127.0.0.1:5000/api/campaigns/${campaignId}/submit`, {
+                    method: 'POST',
+                    body: new FormData(e.target)
+                });
+                
+                if(response.ok) {
+                    document.getElementById('studentForm').classList.add('hidden');
+                    document.getElementById('successMessage').classList.remove('hidden');
+                } else {
+                    alert("Submission failed. Please try again.");
+                }
+            } catch (err) {
+                alert("Server error. Please ensure the backend is running.");
+            }
+            
+            btn.innerText = "Submit Profile";
+            btn.disabled = false;
+        });
+    </script>
+</body>
+</html>
