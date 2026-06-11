@@ -112,13 +112,47 @@
             text-align: center;
             text-decoration: none;
             transition: background 0.2s;
+            margin-bottom: 12px;
         }
 
         .btn:hover {
             background: var(--primary-hover);
         }
 
-        /* Success & Payment View States */
+        /* Specific App Button Colors */
+        .btn-gpay {
+            background: #1A73E8;
+        }
+
+        .btn-gpay:hover {
+            background: #1557B0;
+        }
+
+        .btn-phonepe {
+            background: #5F259F;
+        }
+
+        .btn-phonepe:hover {
+            background: #4a1d7c;
+        }
+
+        .btn-paytm {
+            background: #00BAF2;
+            color: #002970;
+        }
+
+        .btn-paytm:hover {
+            background: #0099c9;
+        }
+
+        .btn-generic {
+            background: #374151;
+        }
+
+        .btn-generic:hover {
+            background: #1F2937;
+        }
+
         .hidden {
             display: none;
         }
@@ -160,20 +194,24 @@
             border-radius: 4px;
             font-weight: bold;
         }
+
+        .divider {
+            margin: 24px 0;
+            border-top: 1px dashed var(--border);
+        }
     </style>
 </head>
 
 <body>
 
     <div class="checkout-container">
-        <!-- STEP 1: Registration Form -->
         <div id="form-step">
             <h2>Registration Checkout</h2>
-            <p class="subtitle">Enter your details to generate your UPI payment link.</p>
+            <p class="subtitle">Enter your details to generate your UPI payment links.</p>
 
             <div class="bootcamp-card">
                 <strong>Data Science & Engineering Bootcamp</strong>
-                <div class="price">₹20,000</div>
+                <div class="price">₹9,999</div>
             </div>
 
             <form id="checkout-form">
@@ -185,35 +223,34 @@
                     <label for="email">Email Address</label>
                     <input type="email" id="email" placeholder="rahul@example.com" required>
                 </div>
-                <button type="submit" class="btn">Proceed to Pay via UPI</button>
+                <button type="submit" class="btn">Proceed to Pay</button>
             </form>
         </div>
 
-        <!-- STEP 2: UPI Intent / QR Simulation Screen -->
         <div id="payment-step" class="hidden text-center">
             <h2>Complete Your Payment</h2>
-            <p class="subtitle">Click the button below to launch your mobile UPI App (GPay, PhonePe, Paytm) or scan to
-                pay.</p>
+            <p class="subtitle">Select your preferred UPI app below.</p>
 
             <div class="bootcamp-card">
                 <p>Amount Due</p>
-                <div class="price" id="pay-amount">₹20,000</div>
+                <div class="price" id="pay-amount">₹9,999</div>
             </div>
 
-            <!-- This link turns into a deep link on mobile devices -->
-            <a href="#" id="upi-intent-link" class="btn" style="margin-bottom: 16px;">Open UPI App</a>
+            <a href="#" id="link-gpay" class="btn btn-gpay">Pay with Google Pay</a>
+            <a href="#" id="link-phonepe" class="btn btn-phonepe">Pay with PhonePe</a>
+            <a href="#" id="link-paytm" class="btn btn-paytm">Pay with Paytm</a>
+            <a href="#" id="link-generic" class="btn btn-generic">Other UPI Apps (Android)</a>
 
-            <p style="font-size: 12px; color: var(--muted); margin-bottom: 20px;">
-                *For desktop users, this button generates a universal UPI URL string. For live validation, a backend
-                verification handler is required.
+            <div class="divider"></div>
+
+            <p style="font-size: 12px; color: var(--muted); margin-bottom: 12px;">
+                *Simulation tools for development*
             </p>
 
-            <!-- Simulated verification button for testing purposes -->
             <button id="simulate-verify" class="btn" style="background: var(--success);">Simulate Successful
                 Payment</button>
         </div>
 
-        <!-- STEP 3: Success Screen -->
         <div id="success-step" class="hidden text-center">
             <div class="success-icon">✓</div>
             <h2>Payment Successful!</h2>
@@ -232,10 +269,10 @@
     </div>
 
     <script>
-        // CONFIGURATION: Replace this with your actual merchant UPI ID
+        // CONFIGURATION: Replace this with your actual merchant UPI ID from Google Pay for Business
         const MERCHANT_UPI_ID = "akhileshsk@okicici";
         const MERCHANT_NAME = "Akhilesh Khope";
-        const BOOTCAMP_PRICE = "20000";
+        const BOOTCAMP_PRICE = "20000.00";
 
         // DOM elements
         const formStep = document.getElementById('form-step');
@@ -243,7 +280,6 @@
         const successStep = document.getElementById('success-step');
 
         const checkoutForm = document.getElementById('checkout-form');
-        const upiIntentLink = document.getElementById('upi-intent-link');
         const simulateVerifyBtn = document.getElementById('simulate-verify');
 
         // State storage
@@ -261,14 +297,18 @@
             // Capture User Info
             orderData.name = document.getElementById('name').value;
             orderData.email = document.getElementById('email').value;
-            orderData.orderNumber = "ORD" + Math.floor(100000 + Math.random() * 900000); // Generates clean random 6-digit order number
+            orderData.orderNumber = "ORD" + Math.floor(100000 + Math.random() * 900000);
 
-            // Build standard UPI Deep Link scheme
-            // pa = Merchant Address, pn = Merchant Name, am = Amount, tn = Transaction Note
-            const upiString = `upi://pay?pa=${encodeURIComponent(MERCHANT_UPI_ID)}&pn=${encodeURIComponent(MERCHANT_NAME)}&am=${orderData.amount}&cu=INR&tn=${encodeURIComponent('Order ' + orderData.orderNumber)}`;
+            // 1. Build the shared parameters string safely encoded for URLs
+            const params = `?pa=${encodeURIComponent(MERCHANT_UPI_ID)}&pn=${encodeURIComponent(MERCHANT_NAME)}&am=${orderData.amount}&cu=INR&tn=${encodeURIComponent('Order ' + orderData.orderNumber)}`;
 
-            // Bind string link onto the action button
-            upiIntentLink.href = upiString;
+            // 2. Attach parameters to the specific app schemes
+            document.getElementById('link-gpay').href = `gpay://upi/pay${params}`;
+            document.getElementById('link-phonepe').href = `phonepe://pay${params}`;
+            document.getElementById('link-paytm').href = `paytmmp://pay${params}`;
+            document.getElementById('link-generic').href = `upi://pay${params}`;
+
+            // Update UI formatting
             document.getElementById('pay-amount').innerText = "₹" + parseFloat(orderData.amount).toLocaleString('en-IN');
 
             // Advance UI view state
@@ -276,19 +316,48 @@
             paymentStep.classList.remove('hidden');
         });
 
-        // Simulating the transaction handler validation hook
-        simulateVerifyBtn.addEventListener('click', function () {
-            // Populate Success Step fields
-            document.getElementById('lbl-order').innerText = orderData.orderNumber;
-            document.getElementById('lbl-amount').innerText = "₹" + parseFloat(orderData.amount).toLocaleString('en-IN');
-            document.getElementById('lbl-email').innerText = orderData.email;
+        // Backend Connection handler
+        simulateVerifyBtn.addEventListener('click', async function () {
+            const originalText = simulateVerifyBtn.innerText;
+            simulateVerifyBtn.innerText = "Processing...";
+            simulateVerifyBtn.disabled = true;
 
-            // Notice text logic wrapper simulation: In real-world production setups, 
-            // you fetch a trigger parameter to an API route here like: fetch('/api/send-confirmation-email', {...})
+            try {
+                // Ensure your Flask app is running on port 5000 for this to work
+                const response = await fetch('http://127.0.0.1:5000/api/payment-success', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: orderData.name,
+                        email: orderData.email,
+                        orderNumber: orderData.orderNumber,
+                        amount: orderData.amount
+                    })
+                });
 
-            // Transition to Success state
-            paymentStep.classList.add('hidden');
-            successStep.classList.remove('hidden');
+                const result = await response.json();
+
+                if (response.ok) {
+                    // Populate Success Step fields
+                    document.getElementById('lbl-order').innerText = orderData.orderNumber;
+                    document.getElementById('lbl-amount').innerText = "₹" + parseFloat(orderData.amount).toLocaleString('en-IN');
+                    document.getElementById('lbl-email').innerText = orderData.email;
+
+                    // Transition to Success state
+                    paymentStep.classList.add('hidden');
+                    successStep.classList.remove('hidden');
+                } else {
+                    alert("Error recording payment: " + result.error);
+                }
+            } catch (error) {
+                console.error("Backend connection failed:", error);
+                alert("Could not connect to the backend server. Is Flask running?");
+            } finally {
+                simulateVerifyBtn.innerText = originalText;
+                simulateVerifyBtn.disabled = false;
+            }
         });
     </script>
 </body>
