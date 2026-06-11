@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootcamp Checkout</title>
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-hover: #4338CA;
+            --background: #F9FAFB;
+            --surface: #FFFFFF;
+            --text: #1F2937;
+            --muted: #6B7280;
+            --border: #E5E7EB;
+            --success: #10B981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .checkout-container {
+            background: var(--surface);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            width: 100%;
+            max-width: 450px;
+            padding: 32px;
+            border: 1px solid var(--border);
+        }
+
+        h2 {
+            margin-bottom: 8px;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .subtitle {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .bootcamp-card {
+            background: #F3F4F6;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .bootcamp-card .price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-top: 4px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text);
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background: var(--primary-hover);
+        }
+
+        /* Success & Payment View States */
+        .hidden {
+            display: none;
+        }
+
+        .success-icon {
+            color: var(--success);
+            font-size: 48px;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .order-details {
+            background: #F9FAFB;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .order-details p {
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .order-details p:last-child {
+            margin-bottom: 0;
+        }
+
+        .badge {
+            font-family: monospace;
+            background: #E0E7FF;
+            color: var(--primary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="checkout-container">
+        <!-- STEP 1: Registration Form -->
+        <div id="form-step">
+            <h2>Registration Checkout</h2>
+            <p class="subtitle">Enter your details to generate your UPI payment link.</p>
+
+            <div class="bootcamp-card">
+                <strong>Data Science & Engineering Bootcamp</strong>
+                <div class="price">₹20,000</div>
+            </div>
+
+            <form id="checkout-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="Rahul Kumar" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="rahul@example.com" required>
+                </div>
+                <button type="submit" class="btn">Proceed to Pay via UPI</button>
+            </form>
+        </div>
+
+        <!-- STEP 2: UPI Intent / QR Simulation Screen -->
+        <div id="payment-step" class="hidden text-center">
+            <h2>Complete Your Payment</h2>
+            <p class="subtitle">Click the button below to launch your mobile UPI App (GPay, PhonePe, Paytm) or scan to
+                pay.</p>
+
+            <div class="bootcamp-card">
+                <p>Amount Due</p>
+                <div class="price" id="pay-amount">₹20,000</div>
+            </div>
+
+            <!-- This link turns into a deep link on mobile devices -->
+            <a href="#" id="upi-intent-link" class="btn" style="margin-bottom: 16px;">Open UPI App</a>
+
+            <p style="font-size: 12px; color: var(--muted); margin-bottom: 20px;">
+                *For desktop users, this button generates a universal UPI URL string. For live validation, a backend
+                verification handler is required.
+            </p>
+
+            <!-- Simulated verification button for testing purposes -->
+            <button id="simulate-verify" class="btn" style="background: var(--success);">Simulate Successful
+                Payment</button>
+        </div>
+
+        <!-- STEP 3: Success Screen -->
+        <div id="success-step" class="hidden text-center">
+            <div class="success-icon">✓</div>
+            <h2>Payment Successful!</h2>
+            <p class="subtitle">Your seat in the bootcamp is officially reserved.</p>
+
+            <div class="order-details">
+                <p><strong>Order Number:</strong> <span id="lbl-order" class="badge"></span></p>
+                <p><strong>Amount Paid:</strong> <span id="lbl-amount"></span></p>
+                <p><strong>Confirmation Sent To:</strong> <span id="lbl-email" style="font-weight: 600;"></span></p>
+            </div>
+
+            <p style="font-size: 13px; color: var(--muted);">
+                A confirmation email containing your receipt and onboarding details has been sent.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // CONFIGURATION: Replace this with your actual merchant UPI ID
+        const MERCHANT_UPI_ID = "akhileshsk@okicici";
+        const MERCHANT_NAME = "Akhilesh Khope";
+        const BOOTCAMP_PRICE = "20000";
+
+        // DOM elements
+        const formStep = document.getElementById('form-step');
+        const paymentStep = document.getElementById('payment-step');
+        const successStep = document.getElementById('success-step');
+
+        const checkoutForm = document.getElementById('checkout-form');
+        const upiIntentLink = document.getElementById('upi-intent-link');
+        const simulateVerifyBtn = document.getElementById('simulate-verify');
+
+        // State storage
+        let orderData = {
+            name: "",
+            email: "",
+            orderNumber: "",
+            amount: BOOTCAMP_PRICE
+        };
+
+        // Form Submission handler
+        checkoutForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Capture User Info
+            orderData.name = document.getElementById('name').value;
+            orderData.email = document.getElementById('email').value;
+            orderData.orderNumber = "ORD" + Math.floor(100000 + Math.random() * 900000); // Generates clean random 6-digit order number
+
+            // Build standard UPI Deep Link scheme
+            // pa = Merchant Address, pn = Merchant Name, am = Amount, tn = Transaction Note
+            const upiString = `upi://pay?pa=${encodeURIComponent(MERCHANT_UPI_ID)}&pn=${encodeURIComponent(MERCHANT_NAME)}&am=${orderData.amount}&cu=INR&tn=${encodeURIComponent('Order ' + orderData.orderNumber)}`;
+
+            // Bind string link onto the action button
+            upiIntentLink.href = upiString;
+            document.getElementById('pay-amount').innerText = "₹" + parseFloat(orderData.amount).toLocaleString('en-IN');
+
+            // Advance UI view state
+            formStep.classList.add('hidden');
+            paymentStep.classList.remove('hidden');
+        });
+
+        // Simulating the transaction handler validation hook
+        simulateVerifyBtn.addEventListener('click', function () {
+            // Populate Success Step fields
+            document.getElementById('lbl-order').innerText = orderData.orderNumber;
+            document.getElementById('lbl-amount').innerText = "₹" + parseFloat(orderData.amount).toLocaleString('en-IN');
+            document.getElementById('lbl-email').innerText = orderData.email;
+
+            // Notice text logic wrapper simulation: In real-world production setups, 
+            // you fetch a trigger parameter to an API route here like: fetch('/api/send-confirmation-email', {...})
+
+            // Transition to Success state
+            paymentStep.classList.add('hidden');
+            successStep.classList.remove('hidden');
+        });
+    </script>
+</body>
+
+</html>
