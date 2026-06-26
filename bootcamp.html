@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Software Engineer (backend), Data Scientist, Data/ML Engineer Bootcamp </title>
+    <meta name="description" content="Intensive 16-week bootcamp covering Python, Software Engineer (backend), Data Engineering, Machine Learning, and Cloud Deployment.">
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- FLAT COLOR PALETTE (From Reference) --- */
+        :root {
+            --primary: #ee6c4c;       /* Sunset Orange */
+            --primary-dark: #d55d3e;
+            --accent-green: #8fbc5d;  /* Moss Green */
+            --accent-gold: #fe9d02;   /* Goldenrod */
+            --section-bg: #F1F5F9;    /* Light Slate */
+            --card-bg: #FFFFFF;
+            --light-bg: #F8FAFC;      /* Slate 50 */
+            --text-main: #1F2937;     /* Slate 800 */
+            --text-muted: #64748B;    /* Slate 500 */
+            --white: #FFFFFF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            background-color: var(--light-bg);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #0F172A;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i { color: var(--primary); font-size: 1.8rem; }
+        .logo span { color: var(--primary); }
+
+        .nav-links a {
+            margin-left: 35px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .btn-nav {
+            background-color: var(--primary);
+            color: var(--white) !important; 
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-nav:hover { background-color: var(--primary-dark); }
+
+        /* --- HERO SECTION --- */
+        header.hero {
+            background-color: var(--primary); 
+            color: var(--white);
+            padding: 180px 5% 120px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 750px;
+            margin: 0 auto 40px;
+            opacity: 0.95;
+        }
+
+        .btn-hero {
+            background-color: var(--white);
+            color: var(--primary);
+            padding: 16px 36px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-hero:hover { background-color: #f0f0f0; }
+
+        /* --- GRID & CARDS --- */
+        .section { padding: 100px 5%; }
+        .section-title { text-align: center; font-size: 2.5rem; font-weight: 800; margin-bottom: 20px; color: #0F172A; }
+        .section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 60px; max-width: 650px; margin-left: auto; margin-right: auto; }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #E2E8F0;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover { transform: translateY(-8px); }
+
+        .card h3 { margin-bottom: 15px; font-size: 1.4rem; color: #0F172A; font-weight: 800; }
+        .card p { color: var(--text-muted); }
+
+        .icon-box {
+            width: 60px; height: 60px;
+            background: var(--light-bg);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        /* --- PRICING/TUITION & CONTAINERS --- */
+        .pricing-section { background-color: var(--section-bg); }
+        .pricing-box {
+            background: var(--white);
+            border: 1px solid #E2E8F0;
+            text-align: center;
+            padding: 60px 50px;
+            border-radius: 24px;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .badge {
+            position: absolute;
+            top: -15px; left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 8px 24px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .price { font-size: 4rem; font-weight: 800; margin: 20px 0; color: #0F172A; }
+        .price span { font-size: 1.5rem; color: var(--text-muted); font-weight: 400; }
+        .pricing-box ul { list-style: none; margin-bottom: 40px; text-align: left; }
+        .pricing-box ul li { margin-bottom: 18px; display: flex; align-items: center; gap: 12px; }
+        .pricing-box ul li i { color: var(--accent-green); }
+
+        /* --- AUDIT/APPLICATION FORM --- */
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 50px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid #E2E8F0;
+        }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-main); }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #CBD5E1;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 16px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn-submit:hover { background-color: var(--primary-dark); }
+
+        footer {
+            background: var(--white);
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid #E2E8F0;
+        }
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 768px) {
+            nav { padding: 15px 5%; justify-content: space-between; }
+            .nav-links a:not(.btn-nav) { display: none !important; }
+            .nav-links { display: flex; align-items: center; }
+            .logo { font-size: 1.1rem; }
+            header.hero { padding: 140px 5% 80px; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
+            .section { padding: 60px 5%; }
+            .section-title { font-size: 2rem; }
+            .grid { grid-template-columns: 1fr; }
+            .pricing-box { padding: 40px 20px; }
+            .price { font-size: 3.2rem; }
+            .form-container { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+    
+    <nav>
+        <a href="#" class="logo" aria-label="Tech Bootcamp Home">
+            <i class="fa-solid fa-code"></i>
+            TechMastery<span>Bootcamp</span>
+        </a>
+        <div class="nav-links">
+            <a href="#curriculum">Curriculum</a>
+            <a href="#instructor">Instructor</a> 
+            <!-- <a href="#tuition">Tuition</a> -->
+            <a href="#apply" class="btn-nav">Apply for Next Cohort</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>From Python Basics to<br>Production ML Pipelines, System Design, ML models trained on TBs of data.</h1>
+            <p>An intensive 16-week program designed to turn beginners into job-ready Software Engineer (backend), Data Scientist, Data Engineers and Machine Learning Engineers. Master ML, Generative AI, algorithms, APIs, and cloud deployments.</p>
+            <a href="#apply" class="btn-hero">Start Your Application</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Curriculum Section (Adapted from Intelligence Capabilities) -->
+        <section id="curriculum" class="section">
+            <h2 class="section-title">The Curriculum</h2>
+            <!-- <p class="section-subtitle">We don't just teach theory; you will build end-to-end data pipelines and deploy real predictive models to the cloud.</p> -->
+            
+            <div class="grid">
+                <article class="card">
+                    <div class="icon-box" style="color: var(--primary);"><i class="fa-brands fa-python"></i></div>
+                    <h3>1. Generative AI</h3>
+                    <p>Build AI agents, fine tune LLMs and more.</p>
+                </article>
+                <article class="card">
+                    <div class="icon-box" style="color: var(--accent-green);"><i class="fa-solid fa-database"></i></div>
+                    <h3>2. Data Engineering</h3>
+                    <p>Build ETL pipelines, handle Out-of-Memory datasets and more.</p>
+                </article>
+                <article class="card">
+                    <div class="icon-box" style="color: var(--accent-gold);"><i class="fa-solid fa-brain"></i></div>
+                    <h3>3. Machine Learning</h3>
+                    <p>Vectorize text data for NLP, build predictive pricing models, train decision trees and more.</p>
+                </article>
+                <article class="card">
+                    <div class="icon-box" style="color: var(--primary);"><i class="fa-solid fa-server"></i></div>
+                    <h3>4. API Development</h3>
+                    <p>Wrap your machine learning models in robust Flask backends. Handle JSON payloads, routing, data validation and more.</p>
+                </article>
+                <article class="card">
+                    <div class="icon-box" style="color: var(--accent-green);"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                    <h3>5. Cloud Deployment</h3>
+                    <p>Navigate the Linux terminal (Ubuntu), manage virtual environments, containerize apps with Docker, deploy to AWS/GCP and more.</p>
+                </article>
+                <article class="card">
+                    <div class="icon-box" style="color: var(--accent-gold);"><i class="fa-solid fa-comments"></i></div>
+                    <h3>6. Interview Mastery</h3>
+                    <p>Weekly sessions tackling real-world SWE, DS, DE and MLE interview questions.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Instructor Section (Adapted from Meet the Founder) -->
+        <section id="instructor" class="section" style="background-color: var(--section-bg);">
+            <h2 class="section-title">Meet Your Instructor</h2>
+            <div class="form-container" style="text-align: center; max-width: 800px;">
+                <div class="icon-box" style="color: var(--primary); margin: 0 auto 20px; border-radius: 50%; width: 80px; height: 80px; font-size: 2.5rem; background: #FFF5F2;">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                </div>
+                <h3 style="font-size: 1.8rem; margin-bottom: 5px; color: #0F172A;">Dr. Akhilesh Khope</h3>
+                <p style="color: var(--primary); margin-bottom: 25px; font-weight: 600; text-transform: uppercase; font-size: 0.9rem;">Lead Educator & MLE Engineer</p>
+                
+                <p style="margin-bottom: 15px; text-align: left;">
+                    Akhilesh holds a Bachelor's and Master's degree from the prestigious <strong>Indian Institute of Technology Bombay</strong>, as well as an MS and PhD in Electrical and Computer Engineering from the <strong>University of California Santa Barbara, USA</strong>.
+                </p>
+                <p style="text-align: left;">
+                    Prior to leading this bootcamp, Akhilesh spent 5 years at <strong>Microsoft Corporation</strong> building enterprise-scale machine learning systems. He designed this curriculum to bridge the gap between academic courses and the rigorous engineering standards required by top-tier tech companies.
+                </p>
+            </div>
+        </section>
+
+        <!-- Tuition Section (Adapted from Pricing) -->
+        <!-- <section id="tuition" class="section">
+            <h2 class="section-title">Bootcamp Tuition</h2>
+            <div class="pricing-box">
+                <div class="badge">Next Cohort: Fall 2026</div>
+                <div class="price">$4,500 <span>/ full program</span></div>
+                <ul>
+                    <li><i class="fa-solid fa-circle-check"></i> 12 weeks of live, instructor-led sessions</li>
+                    <li><i class="fa-solid fa-circle-check"></i> 1-on-1 code reviews and mentorship</li>
+                    <li><i class="fa-solid fa-circle-check"></i> 3 production-ready portfolio projects</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Mock technical interviews & resume prep</li>
+                </ul>
+                <a href="#apply" class="btn-nav" style="display:block; text-align:center;">Secure Your Spot</a>
+            </div>
+        </section> -->
+
+        <!-- Application Form (Adapted from Contact) -->
+        <section id="apply" class="section" style="background-color: var(--light-bg);">
+            <h2 class="section-title">Apply for the Next Cohort</h2>
+            <p class="section-subtitle">Spots are limited. Fill out the application below and our admissions team will contact you.</p>
+            <div class="form-container">
+                <form id="applicationForm">
+                    <div class="form-group">
+                        <label for="form-name">Full Name</label>
+                        <input type="text" id="form-name" name="name" placeholder="Jane Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="form-email">Email Address</label>
+                        <input type="email" id="form-email" name="email" placeholder="jane@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="form-experience">Current Programming Experience</label>
+                        <select id="form-experience" name="experience" required>
+                            <option value="">Select your level...</option>
+                            <option value="Absolute Beginner">Absolute Beginner (No coding experience)</option>
+                            <option value="Novice">Novice (Know basic syntax, loops, variables)</option>
+                            <option value="Intermediate">Intermediate (Have built small projects)</option>
+                            <option value="Advanced">Advanced (Looking to specialize in DE/ML)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="form-goals">What are your career goals?</label>
+                        <textarea id="form-goals" name="goals" rows="4" placeholder="Tell us why you want to join this bootcamp and what you hope to achieve..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Submit Application</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 TechMastery Bootcamp. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for smooth scrolling and form submission -->
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Form submission handling (mailto link)
+        document.getElementById('applicationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('form-name').value;
+            const email = document.getElementById('form-email').value;
+            const experience = document.getElementById('form-experience').value;
+            const goals = document.getElementById('form-goals').value;
+
+            // Using the instructor's email as per the previous document
+            const subject = encodeURIComponent("Bootcamp Application: " + name);
+            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nExperience Level: ${experience}\nGoals:\n${goals}`);
+            window.location.href = `mailto:akhileshsk@gmail.com?subject=${subject}&body=${body}`;
+        });
+    </script>
+</body>
+</html>
