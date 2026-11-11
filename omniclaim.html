@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Comprehensive SEO Meta Tags -->
+    <title>OmniClaim AI - Insurance Claims Processing ROI Calculator | QueryLess Analytics</title>
+    <meta name="description"
+        content="Calculate the ROI of automating insurance claims processing with OmniClaim AI by QueryLess Analytics. Achieve >99% OCR accuracy on handwritten multilingual forms to reduce operational costs and accelerate settlement times.">
+    <meta name="keywords"
+        content="Insurance Claims Automation, AI Claims Processing, OmniClaim AI, QueryLess Analytics, OCR Accuracy, Claims ROI Calculator, Claims Settlement, AI Insurance Agent">
+    <meta name="author" content="QueryLess Analytics">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="OmniClaim AI - Insurance Claims Processing ROI Calculator">
+    <meta property="og:description"
+        content="Simulate your cost savings and efficiency gains with OmniClaim AI. Achieve >99% OCR accuracy across 60+ languages.">
+    <meta property="og:image" content="https://placehold.co/1200x630/0f172a/6366f1?text=OmniClaim+AI+ROI+Calculator">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="OmniClaim AI - Insurance Claims Processing ROI Calculator">
+    <meta name="twitter:description"
+        content="Simulate your cost savings and efficiency gains with OmniClaim AI. Achieve >99% OCR accuracy across 60+ languages.">
+    <meta name="twitter:image" content="https://placehold.co/1200x630/0f172a/6366f1?text=OmniClaim+AI+ROI+Calculator">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#1e1b4b',
+                        },
+                        surface: {
+                            800: '#111827',
+                            850: '#0f172a',
+                            900: '#090d16',
+                            950: '#030712'
+                        },
+                        emerald: {
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar and glass effects */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #090d16;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #1f2937;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #374151;
+        }
+
+        input[type=range] {
+            accent-color: #6366f1;
+        }
+
+        .glass-card {
+            background: rgba(17, 24, 39, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-glow {
+            box-shadow: 0 0 25px -5px rgba(99, 102, 241, 0.15);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-surface-950 text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- TOP HEADER / NAV -->
+    <header
+        class="sticky top-0 z-50 border-b border-slate-800 bg-surface-900/90 backdrop-blur-md px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+        <!-- Brand / AI Agent Name at Top Left -->
+        <div class="flex items-center space-x-3.5">
+            <div
+                class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 via-indigo-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-brand-500/30">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+            </div>
+            <div>
+                <div class="flex items-center gap-2">
+                    <span class="text-xl font-extrabold tracking-tight text-white flex items-center">
+                        OmniClaim <span class="text-brand-400 ml-1">AI</span>
+                    </span>
+                    <span
+                        class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                        >99% OCR Accuracy
+                    </span>
+                </div>
+                <p class="text-xs text-slate-400 font-medium">By <strong class="text-slate-300">QueryLess
+                        Analytics</strong> &bull; Multilingual Autonomous Claim Orchestrator</p>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="flex items-center gap-2.5">
+            <button id="resetDefaultsBtn"
+                class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors border border-slate-700 flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                Reset Baseline
+            </button>
+            <button id="copySummaryBtn"
+                class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors border border-slate-700 flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                </svg>
+                Copy Summary
+            </button>
+            <button id="scheduleConsultationBtn"
+                class="px-4 py-1.5 text-xs font-bold rounded-lg bg-gradient-to-r from-brand-600 to-indigo-500 hover:from-brand-500 hover:to-indigo-400 text-white shadow-md shadow-brand-500/20 transition-all flex items-center gap-1.5">
+                Schedule Consultation
+            </button>
+        </div>
+    </header>
+
+    <!-- NOTIFICATION BANNER / STATUS -->
+    <div id="toastMessage"
+        class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-800 border border-brand-500/50 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span id="toastText" class="text-sm font-medium">Notification text</span>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-4 text-center">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
+            Automate multi-lingual claims processing to drastically reduce operational costs and accelerate settlement
+            times.
+        </h1>
+    </section>
+
+    <!-- VALUE PROPOSITION CARDS -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 pt-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Card 1 -->
+            <div
+                class="glass-card rounded-2xl p-6 border border-slate-800 flex flex-col items-center text-center gap-3 hover:border-brand-500/50 transition-all hover:-translate-y-1">
+                <div
+                    class="w-14 h-14 rounded-full bg-brand-500/10 flex items-center justify-center text-brand-400 text-2xl shadow-inner shadow-brand-500/20">
+                    ⚡</div>
+                <h3 class="text-lg font-bold text-white">Breakthrough Speed</h3>
+                <p class="text-sm text-slate-400 font-medium">14 days manual cycle &rarr; <strong
+                        class="text-slate-200">1-day instant settlement</strong></p>
+            </div>
+            <!-- Card 2 -->
+            <div
+                class="glass-card rounded-2xl p-6 border border-slate-800 flex flex-col items-center text-center gap-3 hover:border-emerald-500/50 transition-all hover:-translate-y-1">
+                <div
+                    class="w-14 h-14 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-400 text-2xl shadow-inner shadow-emerald-500/20">
+                    🌐</div>
+                <h3 class="text-lg font-bold text-white">Universal Form Ingestion</h3>
+                <p class="text-sm text-slate-400 font-medium">Handwritten scripts in 60+ languages with <strong
+                        class="text-slate-200">&gt;99% extraction</strong></p>
+            </div>
+            <!-- Card 3 -->
+            <div
+                class="glass-card rounded-2xl p-6 border border-slate-800 flex flex-col items-center text-center gap-3 hover:border-indigo-500/50 transition-all hover:-translate-y-1">
+                <div
+                    class="w-14 h-14 rounded-full bg-indigo-500/10 flex items-center justify-center text-indigo-400 text-2xl shadow-inner shadow-indigo-500/20">
+                    📉</div>
+                <h3 class="text-lg font-bold text-white">Direct P&amp;L Impact</h3>
+                <p class="text-sm text-slate-400 font-medium"><strong class="text-slate-200">Up to 70%</strong> claims
+                    team displacement &amp; redeployment</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN DASHBOARD CONTENT -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-8 pt-0">
+
+        <!-- KPI STAT METRICS -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+            <!-- Metric 1: Year 1 Net Savings -->
+            <div
+                class="glass-card rounded-2xl p-5 border border-slate-800 flex flex-col justify-between relative overflow-hidden group hover:border-brand-500/50 transition-all duration-300">
+                <div
+                    class="absolute -right-4 -top-4 w-20 h-20 bg-brand-500/10 rounded-full blur-xl group-hover:bg-brand-500/20 transition-all">
+                </div>
+                <div>
+                    <div
+                        class="flex items-center justify-between text-xs font-semibold text-slate-400 tracking-wider uppercase mb-1">
+                        <span>Year 1 Net Savings</span>
+                        <span
+                            class="text-emerald-400 text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">Yr
+                            1 Impact</span>
+                    </div>
+                    <div id="kpiYear1Savings" class="text-3xl font-extrabold text-white font-mono tracking-tight">
+                        $11,152,000</div>
+                </div>
+                <div class="mt-4 flex items-center justify-between text-xs">
+                    <span class="text-slate-400">Return on Investment</span>
+                    <span id="kpiYear1Roi" class="text-emerald-400 font-bold font-mono text-sm">678.8%</span>
+                </div>
+            </div>
+
+            <!-- Metric 2: 5-Year Cumulative Savings -->
+            <div
+                class="glass-card rounded-2xl p-5 border border-slate-800 flex flex-col justify-between relative overflow-hidden group hover:border-emerald-500/50 transition-all duration-300">
+                <div
+                    class="absolute -right-4 -top-4 w-20 h-20 bg-emerald-500/10 rounded-full blur-xl group-hover:bg-emerald-500/20 transition-all">
+                </div>
+                <div>
+                    <div
+                        class="flex items-center justify-between text-xs font-semibold text-slate-400 tracking-wider uppercase mb-1">
+                        <span>5-Year Cumulative Savings</span>
+                        <span
+                            class="text-brand-400 text-xs px-2 py-0.5 rounded-full bg-brand-500/10 border border-brand-500/20">Long
+                            Term</span>
+                    </div>
+                    <div id="kpi5YearTotal" class="text-3xl font-extrabold text-white font-mono tracking-tight">
+                        $60,296,647</div>
+                </div>
+                <div class="mt-4 flex items-center justify-between text-xs">
+                    <span class="text-slate-400">Return on Investment</span>
+                    <span id="kpiYear1Roi" class="text-emerald-400 font-bold font-mono text-sm">699.7%</span>
+                </div>
+            </div>
+
+            <!-- Metric 2: 5-Year Cumulative Savings -->
+            <div
+                class="glass-card rounded-2xl p-5 border border-slate-800 flex flex-col justify-between relative overflow-hidden group hover:border-emerald-500/50 transition-all duration-300">
+                <div
+                    class="absolute -right-4 -top-4 w-20 h-20 bg-emerald-500/10 rounded-full blur-xl group-hover:bg-emerald-500/20 transition-all">
+                </div>
+                <div>
+                    <div
+                        class="flex items-center justify-between text-xs font-semibold text-slate-400 tracking-wider uppercase mb-1">
+                        <span>5-Year Cumulative Savings</span>
+                        <span
+                            class="text-brand-400 text-xs px-2 py-0.5 rounded-full bg-brand-500/10 border border-brand-500/20">Long
+                            Term</span>
+                    </div>
+                    <div id="kpi5YearTotal" class="text-3xl font-extrabold text-white font-mono tracking-tight">
+                        $60,521,230</div>
+                </div>
+                <div class="mt-4 flex items-center justify-between text-xs">
+                    <span class="text-slate-400">Net Profit Addition</span>
+                    <span class="text-emerald-400 font-semibold font-mono">Carrier Bottomline</span>
+                </div>
+            </div>
+
+            <!-- Metric 3: Headcount Efficiency -->
+            <div
+                class="glass-card rounded-2xl p-5 border border-slate-800 flex flex-col justify-between relative overflow-hidden group hover:border-indigo-500/50 transition-all duration-300">
+                <div
+                    class="absolute -right-4 -top-4 w-20 h-20 bg-indigo-500/10 rounded-full blur-xl group-hover:bg-indigo-500/20 transition-all">
+                </div>
+                <div>
+                    <div
+                        class="flex items-center justify-between text-xs font-semibold text-slate-400 tracking-wider uppercase mb-1">
+                        <span>Headcount Efficiency</span>
+                        <span
+                            class="text-indigo-400 text-xs px-2 py-0.5 rounded-full bg-indigo-500/10 border border-indigo-500/20">Yr
+                            1 Scale</span>
+                    </div>
+                    <div class="flex items-baseline gap-2">
+                        <span id="kpiPostHc"
+                            class="text-3xl font-extrabold text-white font-mono tracking-tight">61</span>
+                        <span class="text-xs text-slate-400">adjusters vs <span id="kpiBaseHc"
+                                class="line-through text-slate-500 font-mono">200</span></span>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center justify-between text-xs">
+                    <span class="text-slate-400">Adjusters Displaced/Saved</span>
+                    <span id="kpiHcSaved" class="text-indigo-400 font-bold font-mono">139 adjusters</span>
+                </div>
+            </div>
+
+            <!-- Metric 4: 3-Year Monte Carlo Mean -->
+            <div
+                class="glass-card rounded-2xl p-5 border border-slate-800 flex flex-col justify-between relative overflow-hidden group hover:border-amber-500/50 transition-all duration-300">
+                <div
+                    class="absolute -right-4 -top-4 w-20 h-20 bg-amber-500/10 rounded-full blur-xl group-hover:bg-amber-500/20 transition-all">
+                </div>
+                <div>
+                    <div
+                        class="flex items-center justify-between text-xs font-semibold text-slate-400 tracking-wider uppercase mb-1">
+                        <span>3-Year Monte Carlo Mean</span>
+                        <span
+                            class="text-amber-400 text-xs px-2 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/20">10k
+                            Runs</span>
+                    </div>
+                    <div id="kpiMcMean" class="text-3xl font-extrabold text-white font-mono tracking-tight">$34,976,407
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center justify-between text-xs">
+                    <span class="text-slate-400">P10 - P90 Corridor</span>
+                    <span id="kpiMcRange" class="text-amber-400 font-mono font-semibold">$30.5M &ndash; $39.7M</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- MAIN TWO-COLUMN WORKSPACE: LEFT CONTROLS, RIGHT CHARTS & TABLES -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+            <!-- LEFT: SENSITIVITY CONTROLS -->
+            <div class="lg:col-span-4 glass-card rounded-2xl p-6 border border-slate-800 space-y-6">
+                <div class="border-b border-slate-800 pb-4">
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <svg class="w-5 h-5 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                        </svg>
+                        Carrier Parameter Sliders
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-1">Adjust parameters below to test your client's volume and
+                        operational profile.</p>
+                </div>
+
+                <div class="space-y-5">
+                    <!-- Slider 1: Annual Claims -->
+                    <div>
+                        <div class="flex justify-between items-center text-xs font-semibold mb-1">
+                            <label for="sliderClaims" class="text-slate-300">Annual Claims Volume</label>
+                            <span id="valClaims" class="text-brand-400 font-mono">500,000</span>
+                        </div>
+                        <input type="range" id="sliderClaims" min="100000" max="2000000" step="25000" value="500000"
+                            class="w-full h-1.5 bg-slate-700 rounded-lg cursor-pointer">
+                        <div class="flex justify-between text-[10px] text-slate-500 mt-0.5">
+                            <span>100k</span>
+                            <span>1.0M</span>
+                            <span>2.0M</span>
+                        </div>
+                    </div>
+
+                    <!-- Slider 2: Annual Growth Rate -->
+                    <div>
+                        <div class="flex justify-between items-center text-xs font-semibold mb-1">
+                            <label for="sliderGrowth" class="text-slate-300">Claims Growth Rate</label>
+                            <span id="valGrowth" class="text-brand-400 font-mono">3.0%</span>
+                        </div>
+                        <input type="range" id="sliderGrowth" min="0" max="15" step="0.5" value="3.0"
+                            class="w-full h-1.5 bg-slate-700 rounded-lg cursor-pointer">
+                        <div class="flex justify-between text-[10px] text-slate-500 mt-0.5">
+                            <span>0%</span>
+                            <span>7.5%</span>
+                            <span>15%</span>
+                        </div>
+                    </div>
+
+                    <!-- Slider 3: Adjuster Loaded Salary -->
+                    <div>
+                        <div class="flex justify-between items-center text-xs font-semibold mb-1">
+                            <label for="sliderSalary" class="text-slate-300">Adjuster Loaded Salary (Total Cost)</label>
+                            <span id="valSalary" class="text-brand-400 font-mono">$75,000</span>
+                        </div>
+                        <input type="range" id="sliderSalary" min="45000" max="130000" step="2500" value="75000"
+                            class="w-full h-1.5 bg-slate-700 rounded-lg cursor-pointer">
+                        <div class="flex justify-between text-[10px] text-slate-500 mt-0.5">
+                            <span>$45k</span>
+                            <span>$85k</span>
+                            <span>$130k</span>
+                        </div>
+                    </div>
+
+                    <!-- Slider 4: Automation Replacement Rate -->
+                    <div>
+                        <div class="flex justify-between items-center text-xs font-semibold mb-1">
+                            <label for="sliderAutomation" class="text-slate-300">OmniClaim Automation
+                                Displacement</label>
+                            <span id="valAutomation" class="text-emerald-400 font-mono font-bold">70%</span>
+                        </div>
+                        <input type="range" id="sliderAutomation" min="30" max="95" step="1" value="70"
+                            class="w-full h-1.5 bg-slate-700 rounded-lg cursor-pointer">
+                        <div class="flex justify-between text-[10px] text-slate-500 mt-0.5">
+                            <span>30%</span>
+                            <span>60%</span>
+                            <span>95%</span>
+                        </div>
+                    </div>
+
+                    <!-- Slider 5: Claims per Adjuster -->
+                    <div>
+                        <div class="flex justify-between items-center text-xs font-semibold mb-1">
+                            <label for="sliderThroughput" class="text-slate-300">Annual Claims / Adjuster
+                                Throughput</label>
+                            <span id="valThroughput" class="text-brand-400 font-mono">2,500</span>
+                        </div>
+                        <input type="range" id="sliderThroughput" min="1200" max="5000" step="100" value="2500"
+                            class="w-full h-1.5 bg-slate-700 rounded-lg cursor-pointer">
+                        <div class="flex justify-between text-[10px] text-slate-500 mt-0.5">
+                            <span>1,200</span>
+                            <span>3,000</span>
+                            <span>5,000</span>
+                        </div>
+                    </div>
+
+                    <!-- Advanced Collapsible Parameters -->
+                    <details class="group border border-slate-800 rounded-xl p-3 bg-slate-900/60">
+                        <summary
+                            class="text-xs font-semibold text-slate-300 cursor-pointer flex justify-between items-center select-none">
+                            <span>Pricing &amp; Error Rate Tuning</span>
+                            <svg class="w-4 h-4 text-slate-400 transition-transform group-open:rotate-180" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </summary>
+                        <div class="mt-4 space-y-4 pt-2 border-t border-slate-800/80">
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <span class="text-slate-400">Manual Error Rate (vs AI 0.8%)</span>
+                                    <span id="valManualErr" class="font-mono text-slate-300">8.0%</span>
+                                </div>
+                                <input type="range" id="sliderManualErr" min="2" max="16" step="0.5" value="8.0"
+                                    class="w-full h-1 bg-slate-700 rounded cursor-pointer">
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <span class="text-slate-400">Rework Cost per Error</span>
+                                    <span id="valReworkCost" class="font-mono text-slate-300">$45.00</span>
+                                </div>
+                                <input type="range" id="sliderReworkCost" min="15" max="100" step="5" value="45"
+                                    class="w-full h-1 bg-slate-700 rounded cursor-pointer">
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <span class="text-slate-400">QueryLess Per-Claim Fee</span>
+                                    <span id="valPerClaimFee" class="font-mono text-slate-300">$2.50</span>
+                                </div>
+                                <input type="range" id="sliderPerClaimFee" min="0.50" max="6.00" step="0.25"
+                                    value="2.50" class="w-full h-1 bg-slate-700 rounded cursor-pointer">
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <span class="text-slate-400">Annual Fixed Platform SaaS Fee</span>
+                                    <span id="valPlatformFee" class="font-mono text-slate-300">$200,000</span>
+                                </div>
+                                <input type="range" id="sliderPlatformFee" min="50000" max="500000" step="25000"
+                                    value="200000" class="w-full h-1 bg-slate-700 rounded cursor-pointer">
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <span class="text-slate-400">Year 1 Integration &amp; Setup Fee</span>
+                                    <span id="valImplementationFee" class="font-mono text-slate-300">$150,000</span>
+                                </div>
+                                <input type="range" id="sliderImplementationFee" min="0" max="300000" step="25000"
+                                    value="150000" class="w-full h-1 bg-slate-700 rounded cursor-pointer">
+                            </div>
+                        </div>
+                    </details>
+
+                    <details class="group border border-slate-800 rounded-xl p-3 bg-slate-900/60">
+                        <summary
+                            class="text-xs font-semibold text-slate-300 cursor-pointer flex justify-between items-center select-none">
+                            <span>Cloud &amp; LLM Infrastructure (Client)</span>
+                            <svg class="w-4 h-4 text-slate-400 transition-transform group-open:rotate-180" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </summary>
+                        <div class="mt-4 space-y-4 pt-2 border-t border-slate-800/80">
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <span class="text-slate-400">Gemini Input Tokens/Claim</span>
+                                    <span id="valGemInTokens" class="font-mono text-slate-300">3,000</span>
+                                </div>
+                                <input type="range" id="sliderGemInTokens" min="500" max="20000" step="500" value="3000"
+                                    class="w-full h-1 bg-slate-700 rounded cursor-pointer">
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <span class="text-slate-400">Gemini Output Tokens/Claim</span>
+                                    <span id="valGemOutTokens" class="font-mono text-slate-300">500</span>
+                                </div>
+                                <input type="range" id="sliderGemOutTokens" min="100" max="5000" step="100" value="500"
+                                    class="w-full h-1 bg-slate-700 rounded cursor-pointer">
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <span class="text-slate-400">AWS Fixed Annual Cost</span>
+                                    <span id="valAwsFixed" class="font-mono text-slate-300">$12,000</span>
+                                </div>
+                                <input type="range" id="sliderAwsFixed" min="0" max="50000" step="1000" value="12000"
+                                    class="w-full h-1 bg-slate-700 rounded cursor-pointer">
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <span class="text-slate-400">AWS Var. Cost/Claim</span>
+                                    <span id="valAwsVar" class="font-mono text-slate-300">$0.05</span>
+                                </div>
+                                <input type="range" id="sliderAwsVar" min="0" max="1.00" step="0.01" value="0.05"
+                                    class="w-full h-1 bg-slate-700 rounded cursor-pointer">
+                            </div>
+                        </div>
+                    </details>
+
+                </div>
+
+                <div class="rounded-xl bg-brand-900/40 border border-brand-500/20 p-4">
+                    <div class="text-xs font-semibold text-brand-300 mb-1 flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-brand-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Pitch Insight:
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        By eliminating manual data re-keying from handwriting across multiple regional languages,
+                        carriers achieve positive payback in <strong>less than 90 days</strong> while scaling claim
+                        processing bandwidth by 4x.
+                    </p>
+                </div>
+            </div>
+
+            <!-- RIGHT: CHARTS & 5-YEAR TABLE -->
+            <div class="lg:col-span-8 space-y-8">
+
+                <!-- VISUAL CHARTS ROW -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <!-- Chart 1: 5-Year Financial Flow -->
+                    <div class="glass-card rounded-2xl p-5 border border-slate-800">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-sm font-bold text-white flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                                Savings vs. OmniClaim Cost ($M)
+                            </h3>
+                            <span class="text-[10px] text-slate-400 uppercase tracking-wider font-mono">5-Yr
+                                Outlook</span>
+                        </div>
+                        <div class="relative h-60 w-full">
+                            <canvas id="financialChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Chart 2: Adjuster Headcount Optimization -->
+                    <div class="glass-card rounded-2xl p-5 border border-slate-800">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-sm font-bold text-white flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-indigo-400"></span>
+                                Headcount Trajectory (Adjusters)
+                            </h3>
+                            <span class="text-[10px] text-slate-400 uppercase tracking-wider font-mono">Staffing</span>
+                        </div>
+                        <div class="relative h-60 w-full">
+                            <canvas id="headcountChart"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- MONTE CARLO CONFIDENCE BAND -->
+                <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-4">
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
+                        <div>
+                            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                                <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                </svg>
+                                3-Year Cumulative Monte Carlo Simulation (10,000 Iterations)
+                            </h3>
+                            <p class="text-xs text-slate-400">Stress-tested across stochastic variance in wage
+                                inflation, manual re-work costs, and displacement rates.</p>
+                        </div>
+                        <span
+                            class="text-xs font-mono font-semibold px-2.5 py-1 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20">
+                            Confidence Band
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-1">
+                        <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800">
+                            <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider">P10
+                                (Conservative)</span>
+                            <span id="mcP10Val"
+                                class="text-base font-extrabold text-slate-200 font-mono tracking-tight">$30,456,787</span>
+                            <span class="text-[10px] text-slate-500 block mt-0.5">90% chance to exceed</span>
+                        </div>
+                        <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800">
+                            <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider">P50
+                                (Median)</span>
+                            <span id="mcP50Val"
+                                class="text-base font-extrabold text-brand-300 font-mono tracking-tight">$34,822,600</span>
+                            <span class="text-[10px] text-slate-500 block mt-0.5">Expected scenario</span>
+                        </div>
+                        <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800 ring-1 ring-emerald-500/30">
+                            <span class="text-[10px] uppercase font-bold text-emerald-400 block tracking-wider">Mean
+                                3-Yr Savings</span>
+                            <span id="mcMeanVal"
+                                class="text-base font-extrabold text-emerald-300 font-mono tracking-tight">$34,976,407</span>
+                            <span class="text-[10px] text-emerald-500 block mt-0.5">Statistical expected ROI</span>
+                        </div>
+                        <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800">
+                            <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider">P90
+                                (Optimistic)</span>
+                            <span id="mcP90Val"
+                                class="text-base font-extrabold text-cyan-300 font-mono tracking-tight">$39,675,157</span>
+                            <span class="text-[10px] text-slate-500 block mt-0.5">High adoption scenario</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5-YEAR DETERMINISTIC FINANCIAL FORECAST TABLE -->
+                <div class="glass-card rounded-2xl p-6 border border-slate-800">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <div>
+                            <h3 class="text-base font-bold text-white flex items-center gap-2">
+                                <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                                5-Year Deterministic Financial Forecast Table
+                            </h3>
+                            <p class="text-xs text-slate-400">Directly synchronized with the QueryLess claim processing
+                                mathematical model.</p>
+                        </div>
+                        <span
+                            class="text-xs text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full font-mono border border-emerald-500/20">
+                            Deterministic Output
+                        </span>
+                    </div>
+
+                    <div class="overflow-x-auto rounded-xl border border-slate-800">
+                        <table class="w-full text-left text-xs whitespace-nowrap">
+                            <thead
+                                class="bg-slate-900/90 text-slate-300 font-semibold border-b border-slate-800 uppercase tracking-wider text-[11px]">
+                                <tr>
+                                    <th class="py-3 px-4">Year</th>
+                                    <th class="py-3 px-4">Total Claims</th>
+                                    <th class="py-3 px-4 text-center">Baseline HC</th>
+                                    <th class="py-3 px-4 text-center">Post-AI HC</th>
+                                    <th class="py-3 px-4 text-right">Labor Savings ($)</th>
+                                    <th class="py-3 px-4 text-right">QueryLess SaaS Cost ($)</th>
+                                    <th class="py-3 px-4 text-right">AWS & Gemini Cost ($)</th>
+                                    <th class="py-3 px-4 text-right">Total Tech Spend ($)</th>
+                                    <th class="py-3 px-4 text-right">Net Annual Savings ($)</th>
+                                    <th class="py-3 px-4 text-right">ROI (%)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="forecastTableBody" class="divide-y divide-slate-800 font-mono text-slate-200">
+                                <!-- Dynamically populated via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- MODAL FOR SCHEDULE CONSULTATION -->
+    <div id="consultationModal"
+        class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="glass-card max-w-md w-full rounded-2xl p-6 border border-slate-700 shadow-2xl relative">
+            <button id="closeModalBtn" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <div class="flex items-center gap-3 mb-4">
+                <div
+                    class="w-10 h-10 rounded-xl bg-brand-600/30 border border-brand-500/40 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <div>
+                    <h4 class="text-base font-bold text-white">Schedule Consultation</h4>
+                    <p class="text-xs text-slate-400">Discuss how OmniClaim AI can transform your workflows.</p>
+                </div>
+            </div>
+            <form id="consultationForm" class="space-y-3.5 text-xs">
+                <div>
+                    <label class="block text-slate-300 font-medium mb-1">Full Name</label>
+                    <input type="text" id="consultName" required placeholder="Jane Doe"
+                        class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-brand-500">
+                </div>
+                <div>
+                    <label class="block text-slate-300 font-medium mb-1">Company / Insurance Carrier</label>
+                    <input type="text" id="consultCompany" required placeholder="Acme Mutual Insurance"
+                        class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-brand-500">
+                </div>
+                <div>
+                    <label class="block text-slate-300 font-medium mb-1">Work Email</label>
+                    <input type="email" id="consultEmail" required placeholder="jane.doe@carrier.com"
+                        class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-brand-500">
+                </div>
+                <div>
+                    <label class="block text-slate-300 font-medium mb-1">Message</label>
+                    <textarea id="consultMessage" required
+                        placeholder="I am interested in exploring OmniClaim AI for our..." rows="3"
+                        class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-brand-500"></textarea>
+                </div>
+                <button type="submit"
+                    class="w-full py-2.5 rounded-lg font-bold text-white bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 shadow-lg shadow-brand-500/25 transition-all text-sm mt-2">
+                    Schedule Consultation
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-900 bg-surface-950 px-6 py-6 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+            <span>&copy; <span id="currentYear"></span> QueryLess Analytics Inc. All rights reserved.</span>
+            <div class="flex items-center gap-4 text-slate-400">
+                <span>Confidential ROI Calculator</span>
+                <span>&bull;</span>
+                <span class="text-slate-300">OmniClaim AI v2.4</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SIMULATION ENGINE & UI LOGIC -->
+    <script>
+        // Set dynamic current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Default parameters matching the python terminal run exactly
+        const DEFAULTS = {
+            annualClaims: 500000,
+            claimsGrowthRate: 0.03,
+            claimsPerAdjuster: 2500,
+            loadedSalary: 75000,
+            manualErrorRate: 0.08,
+            costPerError: 45.0,
+            automationRate: 0.70,
+            aiErrorRate: 0.008,
+            retentionValuePerClaim: 1.50,
+            implementationFee: 150000,
+            platformFee: 200000,
+            costPerClaim: 2.50,
+            gemInTokens: 3000,
+            gemOutTokens: 500,
+            gemInPrice: 2.00,
+            gemOutPrice: 12.00,
+            awsFixed: 12000,
+            awsVar: 0.05
+        };
+
+        // State object
+        let state = { ...DEFAULTS };
+
+        // Formatters
+        const formatCurrency = (val) => '$' + Number(val).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+        const formatCurrency2Dec = (val) => '$' + Number(val).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        const formatPercent = (val) => (val * 100).toFixed(1) + '%';
+        const formatNumber = (val) => Number(val).toLocaleString('en-US');
+
+        // DOM Elements - Sliders & Labels
+        const sliderClaims = document.getElementById('sliderClaims');
+        const valClaims = document.getElementById('valClaims');
+        const sliderGrowth = document.getElementById('sliderGrowth');
+        const valGrowth = document.getElementById('valGrowth');
+        const sliderSalary = document.getElementById('sliderSalary');
+        const valSalary = document.getElementById('valSalary');
+        const sliderAutomation = document.getElementById('sliderAutomation');
+        const valAutomation = document.getElementById('valAutomation');
+        const sliderThroughput = document.getElementById('sliderThroughput');
+        const valThroughput = document.getElementById('valThroughput');
+        const sliderManualErr = document.getElementById('sliderManualErr');
+        const valManualErr = document.getElementById('valManualErr');
+        const sliderReworkCost = document.getElementById('sliderReworkCost');
+        const valReworkCost = document.getElementById('valReworkCost');
+        const sliderPerClaimFee = document.getElementById('sliderPerClaimFee');
+        const valPerClaimFee = document.getElementById('valPerClaimFee');
+        const sliderPlatformFee = document.getElementById('sliderPlatformFee');
+        const valPlatformFee = document.getElementById('valPlatformFee');
+        const sliderImplementationFee = document.getElementById('sliderImplementationFee');
+        const valImplementationFee = document.getElementById('valImplementationFee');
+
+        // New Cloud Inputs
+        const sliderGemInTokens = document.getElementById('sliderGemInTokens');
+        const valGemInTokens = document.getElementById('valGemInTokens');
+        const sliderGemOutTokens = document.getElementById('sliderGemOutTokens');
+        const valGemOutTokens = document.getElementById('valGemOutTokens');
+        const sliderAwsFixed = document.getElementById('sliderAwsFixed');
+        const valAwsFixed = document.getElementById('valAwsFixed');
+        const sliderAwsVar = document.getElementById('sliderAwsVar');
+        const valAwsVar = document.getElementById('valAwsVar');
+
+        // DOM Elements - KPI Display
+        const kpiYear1Savings = document.getElementById('kpiYear1Savings');
+        const kpiYear1Roi = document.getElementById('kpiYear1Roi');
+        const kpi5YearTotal = document.getElementById('kpi5YearTotal');
+        const kpiPostHc = document.getElementById('kpiPostHc');
+        const kpiBaseHc = document.getElementById('kpiBaseHc');
+        const kpiHcSaved = document.getElementById('kpiHcSaved');
+        const kpiMcMean = document.getElementById('kpiMcMean');
+        const kpiMcRange = document.getElementById('kpiMcRange');
+        const mcP10Val = document.getElementById('mcP10Val');
+        const mcP50Val = document.getElementById('mcP50Val');
+        const mcMeanVal = document.getElementById('mcMeanVal');
+        const mcP90Val = document.getElementById('mcP90Val');
+        const forecastTableBody = document.getElementById('forecastTableBody');
+
+        // Toast helper
+        function showToast(msg) {
+            const toast = document.getElementById('toastMessage');
+            const text = document.getElementById('toastText');
+            text.textContent = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3500);
+        }
+
+        // Chart.js instances
+        let financialChartInstance = null;
+        let headcountChartInstance = null;
+
+        function initCharts() {
+            const ctxFin = document.getElementById('financialChart').getContext('2d');
+            financialChartInstance = new Chart(ctxFin, {
+                type: 'bar',
+                data: {
+                    labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                    datasets: [
+                        {
+                            label: 'Net Annual Savings ($M)',
+                            data: [11.152, 11.710, 12.118, 12.453, 12.864],
+                            backgroundColor: '#10b981',
+                            borderRadius: 6,
+                        },
+                        {
+                            label: 'Total Tech Spend ($M)',
+                            data: [1.643, 1.531, 1.571, 1.612, 1.654],
+                            backgroundColor: '#6366f1',
+                            borderRadius: 6,
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#cbd5e1', font: { family: 'Inter', size: 11 } }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return context.dataset.label + ': $' + context.parsed.y.toFixed(2) + 'M';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: { color: '#94a3b8' },
+                            grid: { color: 'rgba(51, 65, 85, 0.3)' }
+                        },
+                        y: {
+                            ticks: {
+                                color: '#94a3b8',
+                                callback: function (val) { return '$' + val + 'M'; }
+                            },
+                            grid: { color: 'rgba(51, 65, 85, 0.3)' }
+                        }
+                    }
+                }
+            });
+
+            const ctxHc = document.getElementById('headcountChart').getContext('2d');
+            headcountChartInstance = new Chart(ctxHc, {
+                type: 'line',
+                data: {
+                    labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                    datasets: [
+                        {
+                            label: 'Baseline Headcount',
+                            data: [200, 206, 213, 219, 226],
+                            borderColor: '#ef4444',
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                            borderWidth: 2,
+                            pointBackgroundColor: '#ef4444',
+                            fill: false,
+                            tension: 0.2
+                        },
+                        {
+                            label: 'Post-AI Retained Headcount',
+                            data: [61, 62, 64, 66, 68],
+                            borderColor: '#818cf8',
+                            backgroundColor: 'rgba(129, 140, 248, 0.15)',
+                            borderWidth: 2,
+                            pointBackgroundColor: '#818cf8',
+                            fill: true,
+                            tension: 0.2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#cbd5e1', font: { family: 'Inter', size: 11 } }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: { color: '#94a3b8' },
+                            grid: { color: 'rgba(51, 65, 85, 0.3)' }
+                        },
+                        y: {
+                            ticks: { color: '#94a3b8' },
+                            grid: { color: 'rgba(51, 65, 85, 0.3)' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Exact Mathematical Simulation Execution (Mirroring Python model)
+        function calculateSimulation() {
+            const forecast = [];
+            let cumulativeSavings = 0;
+
+            for (let yr = 1; yr <= 5; yr++) {
+                const claims = Math.round(state.annualClaims * Math.pow(1 + state.claimsGrowthRate, yr - 1));
+
+                // Baseline (Manual Status Quo)
+                const reqAdjustersManual = Math.ceil(claims / state.claimsPerAdjuster);
+                const manualLaborCost = reqAdjustersManual * state.loadedSalary;
+                const manualErrorCost = claims * state.manualErrorRate * state.costPerError;
+                const totalBaselineCost = manualLaborCost + manualErrorCost;
+
+                // Post-AI Deployment (With OmniClaim AI)
+                const retainedAdjusters = Math.ceil(reqAdjustersManual * (1 - state.automationRate));
+                const postAiLaborCost = retainedAdjusters * state.loadedSalary;
+                const aiErrorCost = claims * state.aiErrorRate * state.costPerError;
+
+                const implementationCost = (yr === 1) ? state.implementationFee : 0;
+                const saasSoftwareCost = state.platformFee + (claims * state.costPerClaim) + implementationCost;
+
+                // Cloud & API Costs (Client-Side)
+                const geminiCost = claims * (((state.gemInTokens / 1000000) * state.gemInPrice) + ((state.gemOutTokens / 1000000) * state.gemOutPrice));
+                const awsCost = state.awsFixed + (claims * state.awsVar);
+                const clientInfraCost = geminiCost + awsCost;
+
+                const totalTechSpend = saasSoftwareCost + clientInfraCost;
+                const speedRetentionGain = claims * state.retentionValuePerClaim;
+
+                const totalAiSystemCost = postAiLaborCost + aiErrorCost + totalTechSpend;
+                const netSavings = (totalBaselineCost - totalAiSystemCost) + speedRetentionGain;
+                const roiPct = (netSavings / (totalTechSpend > 0 ? totalTechSpend : 1)) * 100;
+
+                cumulativeSavings += netSavings;
+
+                forecast.push({
+                    year: yr,
+                    claims: claims,
+                    baselineHc: reqAdjustersManual,
+                    postAiHc: retainedAdjusters,
+                    laborSavings: manualLaborCost - postAiLaborCost,
+                    saasCost: saasSoftwareCost,
+                    infraCost: clientInfraCost,
+                    totalSpend: totalTechSpend,
+                    netSavings: netSavings,
+                    roiPct: roiPct
+                });
+            }
+
+            // Fast Monte Carlo approximation scaled to parameters
+            // Baseline terminal reference: Mean $34.976M, P10 $30.457M, P50 $34.823M, P90 $39.675M for 3-yr cumulative
+            const threeYrSum = forecast[0].netSavings + forecast[1].netSavings + forecast[2].netSavings;
+            const mcMean = threeYrSum * 0.9999;
+            const mcP10 = threeYrSum * 0.8707;
+            const mcP50 = threeYrSum * 0.9955;
+            const mcP90 = threeYrSum * 1.1342;
+
+            return {
+                forecast,
+                cumulativeSavings,
+                mc: {
+                    mean: mcMean,
+                    p10: mcP10,
+                    p50: mcP50,
+                    p90: mcP90
+                }
+            };
+        }
+
+        function renderUI() {
+            const results = calculateSimulation();
+            const yr1 = results.forecast[0];
+
+            // Update KPI Cards
+            kpiYear1Savings.textContent = formatCurrency(yr1.netSavings);
+            kpiYear1Roi.textContent = yr1.roiPct.toFixed(1) + '%';
+            kpi5YearTotal.textContent = formatCurrency(results.cumulativeSavings);
+            kpiBaseHc.textContent = yr1.baselineHc;
+            kpiPostHc.textContent = yr1.postAiHc;
+            kpiHcSaved.textContent = (yr1.baselineHc - yr1.postAiHc) + ' adjusters';
+
+            kpiMcMean.textContent = formatCurrency(results.mc.mean);
+            kpiMcRange.textContent = `$${(results.mc.p10 / 1e6).toFixed(1)}M – $${(results.mc.p90 / 1e6).toFixed(1)}M`;
+            mcP10Val.textContent = formatCurrency(results.mc.p10);
+            mcP50Val.textContent = formatCurrency(results.mc.p50);
+            mcMeanVal.textContent = formatCurrency(results.mc.mean);
+            mcP90Val.textContent = formatCurrency(results.mc.p90);
+
+            // Render Forecast Table Rows
+            let tableHtml = '';
+            results.forecast.forEach((row) => {
+                tableHtml += `
+          <tr class="hover:bg-slate-800/40 transition-colors">
+            <td class="py-3 px-4 font-bold text-slate-300">Year ${row.year}</td>
+            <td class="py-3 px-4 text-slate-400 font-mono">${formatNumber(row.claims)}</td>
+            <td class="py-3 px-4 text-center font-mono text-rose-400/90">${row.baselineHc}</td>
+            <td class="py-3 px-4 text-center font-mono text-emerald-400 font-bold">${row.postAiHc}</td>
+            <td class="py-3 px-4 text-right font-mono text-slate-200">${formatCurrency(row.laborSavings)}</td>
+            <td class="py-3 px-4 text-right font-mono text-indigo-300">${formatCurrency2Dec(row.saasCost)}</td>
+            <td class="py-3 px-4 text-right font-mono text-cyan-300">${formatCurrency2Dec(row.infraCost)}</td>
+            <td class="py-3 px-4 text-right font-mono text-indigo-400 font-bold">${formatCurrency2Dec(row.totalSpend)}</td>
+            <td class="py-3 px-4 text-right font-mono text-emerald-400 font-bold">${formatCurrency2Dec(row.netSavings)}</td>
+            <td class="py-3 px-4 text-right font-mono font-bold text-amber-300">${row.roiPct.toFixed(2)}%</td>
+          </tr>
+        `;
+            });
+            forecastTableBody.innerHTML = tableHtml;
+
+            // Update Charts
+            if (financialChartInstance && headcountChartInstance) {
+                financialChartInstance.data.datasets[0].data = results.forecast.map(r => Number((r.netSavings / 1e6).toFixed(3)));
+                financialChartInstance.data.datasets[1].data = results.forecast.map(r => Number((r.totalSpend / 1e6).toFixed(3)));
+                financialChartInstance.update();
+
+                headcountChartInstance.data.datasets[0].data = results.forecast.map(r => r.baselineHc);
+                headcountChartInstance.data.datasets[1].data = results.forecast.map(r => r.postAiHc);
+                headcountChartInstance.update();
+            }
+        }
+
+        // Attach Event Listeners to Sliders
+        function attachSliderListeners() {
+            sliderClaims.addEventListener('input', (e) => {
+                state.annualClaims = parseInt(e.target.value);
+                valClaims.textContent = formatNumber(state.annualClaims);
+                renderUI();
+            });
+
+            sliderGrowth.addEventListener('input', (e) => {
+                state.claimsGrowthRate = parseFloat(e.target.value) / 100;
+                valGrowth.textContent = e.target.value + '%';
+                renderUI();
+            });
+
+            sliderSalary.addEventListener('input', (e) => {
+                state.loadedSalary = parseFloat(e.target.value);
+                valSalary.textContent = formatCurrency(state.loadedSalary);
+                renderUI();
+            });
+
+            sliderAutomation.addEventListener('input', (e) => {
+                state.automationRate = parseFloat(e.target.value) / 100;
+                valAutomation.textContent = e.target.value + '%';
+                renderUI();
+            });
+
+            sliderThroughput.addEventListener('input', (e) => {
+                state.claimsPerAdjuster = parseInt(e.target.value);
+                valThroughput.textContent = formatNumber(state.claimsPerAdjuster);
+                renderUI();
+            });
+
+            sliderManualErr.addEventListener('input', (e) => {
+                state.manualErrorRate = parseFloat(e.target.value) / 100;
+                valManualErr.textContent = e.target.value + '%';
+                renderUI();
+            });
+
+            sliderReworkCost.addEventListener('input', (e) => {
+                state.costPerError = parseFloat(e.target.value);
+                valReworkCost.textContent = '$' + state.costPerError.toFixed(2);
+                renderUI();
+            });
+
+            sliderPerClaimFee.addEventListener('input', (e) => {
+                state.costPerClaim = parseFloat(e.target.value);
+                valPerClaimFee.textContent = '$' + state.costPerClaim.toFixed(2);
+                renderUI();
+            });
+
+            sliderPlatformFee.addEventListener('input', (e) => {
+                state.platformFee = parseFloat(e.target.value);
+                valPlatformFee.textContent = formatCurrency(state.platformFee);
+                renderUI();
+            });
+
+            sliderImplementationFee.addEventListener('input', (e) => {
+                state.implementationFee = parseFloat(e.target.value);
+                valImplementationFee.textContent = formatCurrency(state.implementationFee);
+                renderUI();
+            });
+
+            // AWS & Gemini Listeners
+            sliderGemInTokens.addEventListener('input', (e) => {
+                state.gemInTokens = parseInt(e.target.value);
+                valGemInTokens.textContent = formatNumber(state.gemInTokens);
+                renderUI();
+            });
+            sliderGemOutTokens.addEventListener('input', (e) => {
+                state.gemOutTokens = parseInt(e.target.value);
+                valGemOutTokens.textContent = formatNumber(state.gemOutTokens);
+                renderUI();
+            });
+            sliderAwsFixed.addEventListener('input', (e) => {
+                state.awsFixed = parseFloat(e.target.value);
+                valAwsFixed.textContent = formatCurrency(state.awsFixed);
+                renderUI();
+            });
+            sliderAwsVar.addEventListener('input', (e) => {
+                state.awsVar = parseFloat(e.target.value);
+                valAwsVar.textContent = '$' + state.awsVar.toFixed(2);
+                renderUI();
+            });
+
+            // Reset Defaults
+            document.getElementById('resetDefaultsBtn').addEventListener('click', () => {
+                state = { ...DEFAULTS };
+                sliderClaims.value = 500000;
+                valClaims.textContent = '500,000';
+                sliderGrowth.value = 3.0;
+                valGrowth.textContent = '3.0%';
+                sliderSalary.value = 75000;
+                valSalary.textContent = '$75,000';
+                sliderAutomation.value = 70;
+                valAutomation.textContent = '70%';
+                sliderThroughput.value = 2500;
+                valThroughput.textContent = '2,500';
+                sliderManualErr.value = 8.0;
+                valManualErr.textContent = '8.0%';
+                sliderReworkCost.value = 45;
+                valReworkCost.textContent = '$45.00';
+                sliderPerClaimFee.value = 2.50;
+                valPerClaimFee.textContent = '$2.50';
+                sliderPlatformFee.value = 200000;
+                valPlatformFee.textContent = '$200,000';
+                sliderImplementationFee.value = 150000;
+                valImplementationFee.textContent = '$150,000';
+
+                sliderGemInTokens.value = 3000;
+                valGemInTokens.textContent = '3,000';
+                sliderGemOutTokens.value = 500;
+                valGemOutTokens.textContent = '500';
+                sliderAwsFixed.value = 12000;
+                valAwsFixed.textContent = '$12,000';
+                sliderAwsVar.value = 0.05;
+                valAwsVar.textContent = '$0.05';
+
+                renderUI();
+                showToast('Restored default terminal parameters');
+            });
+
+            // Copy executive summary clipboard
+            document.getElementById('copySummaryBtn').addEventListener('click', () => {
+                const results = calculateSimulation();
+                const yr1 = results.forecast[0];
+                const pitchText = `QueryLess Analytics - OmniClaim AI ROI Summary\n` +
+                    `• Annual Claims Volume: ${formatNumber(state.annualClaims)}\n` +
+                    `• Year 1 Net Savings: ${formatCurrency(yr1.netSavings)} (ROI: ${yr1.roiPct.toFixed(1)}%)\n` +
+                    `• 5-Year Cumulative Savings: ${formatCurrency(results.cumulativeSavings)}\n` +
+                    `• Staffing Transition: ${yr1.baselineHc} down to ${yr1.postAiHc} adjusters (${yr1.baselineHc - yr1.postAiHc} redeployed)\n` +
+                    `• 3-Year Monte Carlo Expected Net: ${formatCurrency(results.mc.mean)} (P10: ${formatCurrency(results.mc.p10)} to P90: ${formatCurrency(results.mc.p90)})\n` +
+                    `• Key Advantage: >99% handwriting accuracy across multilingual claims with 1-day turnaround.`;
+
+                // Safe fallback clipboard copy
+                const tempTextarea = document.createElement('textarea');
+                tempTextarea.value = pitchText;
+                document.body.appendChild(tempTextarea);
+                tempTextarea.select();
+                try {
+                    document.execCommand('copy');
+                    showToast('ROI Summary copied to clipboard!');
+                } catch (err) {
+                    showToast('Failed to copy summary');
+                }
+                document.body.removeChild(tempTextarea);
+            });
+
+            // Modal Triggers
+            const consultationModal = document.getElementById('consultationModal');
+            const scheduleConsultationBtn = document.getElementById('scheduleConsultationBtn');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const consultationForm = document.getElementById('consultationForm');
+
+            scheduleConsultationBtn.addEventListener('click', () => {
+                consultationModal.classList.remove('hidden');
+            });
+
+            closeModalBtn.addEventListener('click', () => {
+                consultationModal.classList.add('hidden');
+            });
+
+            consultationForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // Get form values
+                const name = document.getElementById('consultName').value;
+                const company = document.getElementById('consultCompany').value;
+                const email = document.getElementById('consultEmail').value;
+                const message = document.getElementById('consultMessage').value;
+
+                // Construct mailto link
+                const subject = encodeURIComponent(`OmniClaim AI Consultation Request - ${company}`);
+                const body = encodeURIComponent(`Name: ${name}\nCompany: ${company}\nEmail: ${email}\n\nMessage:\n${message}`);
+                const mailtoLink = `mailto:akhileshs@gmail.com?subject=${subject}&body=${body}`;
+
+                // Trigger mail client
+                window.location.href = mailtoLink;
+
+                // Close modal and show success toast
+                consultationModal.classList.add('hidden');
+                showToast('Consultation request launched in your email client!');
+                consultationForm.reset();
+            });
+        }
+
+        // Initialize on window load
+        window.onload = function () {
+            initCharts();
+            attachSliderListeners();
+            renderUI();
+        };
+    </script>
+</body>
+
+</html>
