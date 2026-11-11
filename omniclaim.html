@@ -701,66 +701,66 @@
 
     </main>
 
-    <!-- MODAL FOR SCHEDULE CONSULTATION -->
-    <div id="consultationModal"
-        class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-        <div class="glass-card max-w-md w-full rounded-2xl p-6 border border-slate-700 shadow-2xl relative">
-            <button id="closeModalBtn" class="absolute top-4 right-4 text-slate-400 hover:text-white">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-            <div class="flex items-center gap-3 mb-4">
+    <!-- BOTTOM CONSULTATION SECTION -->
+    <section id="consultationSection" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
+        <div
+            class="glass-card rounded-3xl p-8 sm:p-10 border border-slate-700 shadow-2xl relative overflow-hidden group">
+            <div
+                class="absolute -right-20 -top-20 w-64 h-64 bg-brand-500/10 rounded-full blur-3xl group-hover:bg-brand-500/20 transition-all">
+            </div>
+            <div class="text-center mb-8 relative z-10">
                 <div
-                    class="w-10 h-10 rounded-xl bg-brand-600/30 border border-brand-500/40 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    class="w-14 h-14 mx-auto rounded-xl bg-brand-600/30 border border-brand-500/40 flex items-center justify-center mb-5">
+                    <svg class="w-7 h-7 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                 </div>
-                <div>
-                    <h4 class="text-base font-bold text-white">Schedule Consultation</h4>
-                    <p class="text-xs text-slate-400">Discuss how OmniClaim AI can transform your workflows.</p>
-                </div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Schedule a Consultation</h2>
+                <p class="text-sm text-slate-400 mt-2">Discuss how OmniClaim AI can transform your workflows and drive
+                    continuous ROI.</p>
             </div>
-            <form id="consultationForm" class="space-y-3.5 text-xs">
-                <div>
-                    <label class="block text-slate-300 font-medium mb-1">Full Name</label>
-                    <input type="text" id="consultName" required placeholder="Jane Doe"
-                        class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-brand-500">
+
+            <form id="consultationForm" class="space-y-5 text-sm max-w-2xl mx-auto relative z-10">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div>
+                        <label class="block text-slate-300 font-medium mb-1.5">Full Name</label>
+                        <input type="text" id="consultName" required placeholder="Jane Doe"
+                            class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 font-medium mb-1.5">Company / Insurance Carrier</label>
+                        <input type="text" id="consultCompany" required placeholder="Acme Mutual Insurance"
+                            class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all">
+                    </div>
                 </div>
                 <div>
-                    <label class="block text-slate-300 font-medium mb-1">Company / Insurance Carrier</label>
-                    <input type="text" id="consultCompany" required placeholder="Acme Mutual Insurance"
-                        class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-brand-500">
-                </div>
-                <div>
-                    <label class="block text-slate-300 font-medium mb-1">Work Email</label>
+                    <label class="block text-slate-300 font-medium mb-1.5">Work Email</label>
                     <input type="email" id="consultEmail" required placeholder="jane.doe@carrier.com"
-                        class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-brand-500">
+                        class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all">
                 </div>
                 <div>
-                    <label class="block text-slate-300 font-medium mb-1">Message</label>
+                    <label class="block text-slate-300 font-medium mb-1.5">Message</label>
                     <textarea id="consultMessage" required
-                        placeholder="I am interested in exploring OmniClaim AI for our..." rows="3"
-                        class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-brand-500"></textarea>
+                        placeholder="I am interested in exploring OmniClaim AI for our..." rows="4"
+                        class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all"></textarea>
                 </div>
                 <button type="submit"
-                    class="w-full py-2.5 rounded-lg font-bold text-white bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 shadow-lg shadow-brand-500/25 transition-all text-sm mt-2">
+                    class="w-full py-3.5 rounded-xl font-bold text-white bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 shadow-lg shadow-brand-500/25 transition-all text-base mt-4">
                     Schedule Consultation
                 </button>
             </form>
         </div>
-    </div>
+    </section>
 
     <!-- FOOTER -->
     <footer class="border-t border-slate-900 bg-surface-950 px-6 py-6 text-center text-xs text-slate-500">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-            <span>&copy; <span id="currentYear"></span> QueryLess Analytics Inc. All rights reserved.</span>
+            <span>&copy; <span id="currentYear"></span> QueryLess Analytics. All rights reserved.</span>
             <div class="flex items-center gap-4 text-slate-400">
                 <span>Confidential ROI Calculator</span>
                 <span>&bull;</span>
-                <span class="text-slate-300">OmniClaim AI v2.4</span>
+                <span class="text-slate-300">OmniClaim AI</span>
             </div>
         </div>
     </footer>
@@ -1233,18 +1233,13 @@
                 document.body.removeChild(tempTextarea);
             });
 
-            // Modal Triggers
-            const consultationModal = document.getElementById('consultationModal');
+            // Smooth Scroll & Consultation Form Logic
+            const consultationSection = document.getElementById('consultationSection');
             const scheduleConsultationBtn = document.getElementById('scheduleConsultationBtn');
-            const closeModalBtn = document.getElementById('closeModalBtn');
             const consultationForm = document.getElementById('consultationForm');
 
             scheduleConsultationBtn.addEventListener('click', () => {
-                consultationModal.classList.remove('hidden');
-            });
-
-            closeModalBtn.addEventListener('click', () => {
-                consultationModal.classList.add('hidden');
+                consultationSection.scrollIntoView({ behavior: 'smooth' });
             });
 
             consultationForm.addEventListener('submit', (e) => {
@@ -1264,8 +1259,7 @@
                 // Trigger mail client
                 window.location.href = mailtoLink;
 
-                // Close modal and show success toast
-                consultationModal.classList.add('hidden');
+                // Show success toast and reset
                 showToast('Consultation request launched in your email client!');
                 consultationForm.reset();
             });
