@@ -128,10 +128,6 @@
                     <span class="text-xl font-extrabold tracking-tight text-white flex items-center">
                         OmniClaim <span class="text-brand-400 ml-1">AI</span>
                     </span>
-                    <!-- <span
-                        class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                        >99% OCR Accuracy
-                    </span> -->
                 </div>
                 <p class="text-xs text-slate-400 font-medium">By <strong class="text-slate-300">QueryLess
                         Analytics</strong> &bull; Multilingual Autonomous Claim Orchestrator</p>
@@ -262,32 +258,9 @@
                 </div>
                 <div class="mt-4 flex items-center justify-between text-xs">
                     <span class="text-slate-400">Return on Investment</span>
-                    <span id="kpiYear1Roi" class="text-emerald-400 font-bold font-mono text-sm">699.7%</span>
+                    <span id="kpi5YearRoi" class="text-emerald-400 font-bold font-mono text-sm">699.7%</span>
                 </div>
             </div>
-
-            <!-- Metric 2: 5-Year Cumulative Savings -->
-            <!-- <div
-                class="glass-card rounded-2xl p-5 border border-slate-800 flex flex-col justify-between relative overflow-hidden group hover:border-emerald-500/50 transition-all duration-300">
-                <div
-                    class="absolute -right-4 -top-4 w-20 h-20 bg-emerald-500/10 rounded-full blur-xl group-hover:bg-emerald-500/20 transition-all">
-                </div>
-                <div>
-                    <div
-                        class="flex items-center justify-between text-xs font-semibold text-slate-400 tracking-wider uppercase mb-1">
-                        <span>5-Year Cumulative Savings</span>
-                        <span
-                            class="text-brand-400 text-xs px-2 py-0.5 rounded-full bg-brand-500/10 border border-brand-500/20">Long
-                            Term</span>
-                    </div>
-                    <div id="kpi5YearTotal" class="text-3xl font-extrabold text-white font-mono tracking-tight">
-                        $60,521,230</div>
-                </div>
-                <div class="mt-4 flex items-center justify-between text-xs">
-                    <span class="text-slate-400">Net Profit Addition</span>
-                    <span class="text-emerald-400 font-semibold font-mono">Carrier Bottomline</span>
-                </div>
-            </div> -->
 
             <!-- Metric 3: Headcount Efficiency -->
             <div
@@ -837,6 +810,7 @@
         const kpiYear1Savings = document.getElementById('kpiYear1Savings');
         const kpiYear1Roi = document.getElementById('kpiYear1Roi');
         const kpi5YearTotal = document.getElementById('kpi5YearTotal');
+        const kpi5YearRoi = document.getElementById('kpi5YearRoi');
         const kpiPostHc = document.getElementById('kpiPostHc');
         const kpiBaseHc = document.getElementById('kpiBaseHc');
         const kpiHcSaved = document.getElementById('kpiHcSaved');
@@ -969,6 +943,7 @@
         function calculateSimulation() {
             const forecast = [];
             let cumulativeSavings = 0;
+            let cumulativeSpend = 0;
 
             for (let yr = 1; yr <= 5; yr++) {
                 const claims = Math.round(state.annualClaims * Math.pow(1 + state.claimsGrowthRate, yr - 1));
@@ -1000,6 +975,7 @@
                 const roiPct = (netSavings / (totalTechSpend > 0 ? totalTechSpend : 1)) * 100;
 
                 cumulativeSavings += netSavings;
+                cumulativeSpend += totalTechSpend;
 
                 forecast.push({
                     year: yr,
@@ -1015,6 +991,8 @@
                 });
             }
 
+            const cumulativeRoiPct = (cumulativeSavings / (cumulativeSpend > 0 ? cumulativeSpend : 1)) * 100;
+
             // Fast Monte Carlo approximation scaled to parameters
             // Baseline terminal reference: Mean $34.976M, P10 $30.457M, P50 $34.823M, P90 $39.675M for 3-yr cumulative
             const threeYrSum = forecast[0].netSavings + forecast[1].netSavings + forecast[2].netSavings;
@@ -1026,6 +1004,7 @@
             return {
                 forecast,
                 cumulativeSavings,
+                cumulativeRoiPct,
                 mc: {
                     mean: mcMean,
                     p10: mcP10,
@@ -1043,6 +1022,7 @@
             kpiYear1Savings.textContent = formatCurrency(yr1.netSavings);
             kpiYear1Roi.textContent = yr1.roiPct.toFixed(1) + '%';
             kpi5YearTotal.textContent = formatCurrency(results.cumulativeSavings);
+            kpi5YearRoi.textContent = results.cumulativeRoiPct.toFixed(1) + '%';
             kpiBaseHc.textContent = yr1.baselineHc;
             kpiPostHc.textContent = yr1.postAiHc;
             kpiHcSaved.textContent = (yr1.baselineHc - yr1.postAiHc) + ' adjusters';
@@ -1214,7 +1194,7 @@
                 const pitchText = `QueryLess Analytics - OmniClaim AI ROI Summary\n` +
                     `• Annual Claims Volume: ${formatNumber(state.annualClaims)}\n` +
                     `• Year 1 Net Savings: ${formatCurrency(yr1.netSavings)} (ROI: ${yr1.roiPct.toFixed(1)}%)\n` +
-                    `• 5-Year Cumulative Savings: ${formatCurrency(results.cumulativeSavings)}\n` +
+                    `• 5-Year Cumulative Savings: ${formatCurrency(results.cumulativeSavings)} (5-Yr ROI: ${results.cumulativeRoiPct.toFixed(1)}%)\n` +
                     `• Staffing Transition: ${yr1.baselineHc} down to ${yr1.postAiHc} adjusters (${yr1.baselineHc - yr1.postAiHc} redeployed)\n` +
                     `• 3-Year Monte Carlo Expected Net: ${formatCurrency(results.mc.mean)} (P10: ${formatCurrency(results.mc.p10)} to P90: ${formatCurrency(results.mc.p90)})\n` +
                     `• Key Advantage: >99% handwriting accuracy across multilingual claims with 1-day turnaround.`;
