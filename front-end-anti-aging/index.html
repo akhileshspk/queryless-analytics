@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bio-AI Inference Engine</title>
+    <link rel="stylesheet" href="style.css"">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Mode Select</h2>
+            <button class="mode-btn active" data-mode="chat">Live Chat</button>
+            <button class="mode-btn" data-mode="hypothesis">Hypothesis Engine</button>
+        </aside>
+        
+        <main class="chat-area">
+            <div id="chat-box" class="chat-box">
+                <div class="message system">System initialized. Select a mode and begin.</div>
+            </div>
+            
+            <div class="input-area">
+                <textarea id="user-input" placeholder="Enter problem statement or chat query..."></textarea>
+                <button id="send-btn">Send</button>
+            </div>
+        </main>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
