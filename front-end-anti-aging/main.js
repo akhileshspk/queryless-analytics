@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         sendBtn.innerText = 'Computing...';
 
         try {
-            const response = await fetch('http://13.62.87.73:5000/api/generate', {
+            const response = await fetch('https://api.qanalytics.in/api/generate', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
